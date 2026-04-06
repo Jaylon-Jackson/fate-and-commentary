@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fate &amp; Commentary &mdash; Readings by Jaylon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0c1117;
+      --surface:    #111c2e;
+      --surface2:   #162030;
+      --text:       rgba(240,232,215,.90);
+      --text-muted: rgba(180,200,220,.50);
+      --gold:       #c9a84c;
+      --gold-dim:   rgba(201,168,76,.20);
+      --moon:       rgba(140,180,220,.60);
+      --moon-solid: #6b9fc5;
+      --border:     rgba(201,168,76,.15);
+      --border-moon:rgba(107,159,197,.25);
+      --rust:       rgba(180,80,60,.55);
+      --max:        720px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── REVEAL ────────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── EXPIRED ───────────────────────────────────────────── */
+    #expired-screen {
+      display: none; min-height: 100vh; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 2rem; background: var(--bg);
+    }
+    #expired-screen .expired-art {
+      width: min(300px, 78vw); border-radius: 12px;
+      opacity: .85; margin-bottom: 2rem; filter: grayscale(.2);
+    }
+    #expired-screen h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      color: var(--text); margin-bottom: .75rem;
+    }
+    #expired-screen p { color: var(--text-muted); font-size: .93rem; max-width: 360px; margin: 0 auto .5rem; }
+    #expired-screen .brand-expired {
+      margin-top: 2rem; font-size: .68rem; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--gold); opacity: .65;
+    }
+
+    /* ─── BRAND BAR ─────────────────────────────────────────── */
+    .brand-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .75rem 1.5rem;
+      background: rgba(12,17,23,.90); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand-mark { font-size: .68rem; letter-spacing: .20em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .brand-bar nav { display: flex; gap: 1.5rem; }
+    .brand-bar nav a { font-size: .72rem; letter-spacing: .10em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color .2s; }
+    .brand-bar nav a:hover { color: var(--text); }
+
+    /* ─── HERO ──────────────────────────────────────────────── */
+    .hero-section { position: relative; width: 100%; height: 85vh; min-height: 480px; overflow: hidden; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(12,17,23,.10) 0%, rgba(12,17,23,.02) 30%, rgba(12,17,23,.72) 70%, rgba(12,17,23,.97) 100%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 2.5rem clamp(1.25rem, 5vw, 3rem);
+    }
+    .hero-week { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: .75rem; }
+    .blog-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.8rem, 9vw, 5.5rem); font-weight: 900; line-height: 1; color: #fff; letter-spacing: -.02em; }
+    .blog-title .amp { color: var(--gold); font-style: italic; font-weight: 700; }
+    .hero-tagline { margin-top: .85rem; font-size: .85rem; color: var(--text-muted); letter-spacing: .06em; }
+
+    /* ─── CONTAINER ─────────────────────────────────────────── */
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 2rem); }
+
+    /* ─── INTRO ─────────────────────────────────────────────── */
+    .blog-intro { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); }
+    .star-child-greeting {
+      display: block; font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic; font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      color: var(--gold); letter-spacing: .04em; margin-bottom: 1.6rem; opacity: .90;
+    }
+    .star-child-greeting::after { content: ''; display: block; width: 2rem; height: 1px; background: var(--gold); opacity: .35; margin-top: .65rem; }
+    .blog-intro p { color: var(--text); font-size: 1.05rem; line-height: 1.80; margin-bottom: 1.1rem; }
+    .blog-intro p:last-child { margin-bottom: 0; }
+
+    /* ─── VIBE CHECK ────────────────────────────────────────── */
+    .vibe-check { padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
+    .vibe-inner { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.6rem; }
+    .vibe-eyebrow { font-size: .65rem; letter-spacing: .20em; text-transform: uppercase; color: var(--text-muted); margin-bottom: .5rem; }
+    .vibe-heading { font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; }
+    .vibe-ki { display: flex; align-items: center; gap: .6rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .vibe-ki-label { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); opacity: .75; }
+    .vibe-ki-card { font-size: .88rem; font-weight: 500; color: var(--text); }
+    .vibe-prose { font-size: .95rem; color: rgba(245,240,232,.78); line-height: 1.75; margin-bottom: 1.2rem; }
+    .vibe-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .55rem 1.1rem; border: 1px solid rgba(201,168,76,.40);
+      border-radius: 4px; font-size: .74rem; letter-spacing: .10em;
+      text-transform: uppercase; color: var(--gold); text-decoration: none; transition: background .2s;
+    }
+    .vibe-btn:hover { background: rgba(201,168,76,.10); }
+    .vibe-btn::after { content: '→'; }
+
+    /* ─── BRIDGE ────────────────────────────────────────────── */
+    .act-bridge { padding: 2.8rem 0 2.2rem; border-bottom: 1px solid var(--border); }
+    .act-bridge p { font-size: 1.05rem; color: rgba(245,240,232,.80); line-height: 1.80; margin-bottom: 1rem; }
+    .act-bridge p:last-child { margin-bottom: 0; }
+
+    /* ─── READING BLOCKS ────────────────────────────────────── */
+    .reading-block { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+    .act-label { font-size: .63rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: .25rem; }
+    .section-eyebrow { font-size: .68rem; letter-spacing: .20em; text-transform: uppercase; color: var(--gold); margin-bottom: .5rem; }
+    .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.4rem, 3.5vw, 1.9rem); font-weight: 700; color: var(--text); margin-bottom: .35rem; line-height: 1.2; }
+    .section-subtitle { font-size: .80rem; color: var(--text-muted); letter-spacing: .05em; margin-bottom: 1.8rem; }
+
+    /* ─── POSITION CARDS ────────────────────────────────────── */
+    .position-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem 1.5rem; margin-bottom: 1.5rem; }
+    .position-header { display: flex; align-items: baseline; gap: .75rem; margin-bottom: .75rem; flex-wrap: wrap; }
+    .position-num { font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); }
+    .position-name { font-size: .78rem; font-weight: 500; letter-spacing: .10em; text-transform: uppercase; color: var(--gold); }
+    .card-names { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+    .card-chip { background: var(--gold-dim); border: 1px solid rgba(201,168,76,.30); border-radius: 4px; padding: .25rem .65rem; font-size: .80rem; color: rgba(240,232,215,.85); letter-spacing: .03em; }
+    .card-chip.reversed { border-color: var(--border-moon); background: rgba(107,159,197,.10); color: var(--moon); }
+    .position-reading p { font-size: .97rem; color: rgba(245,240,232,.85); line-height: 1.78; margin-bottom: .8rem; }
+    .position-reading p:last-child { margin-bottom: 0; }
+
+    /* ─── KEY INFLUENCE / THE TELL ──────────────────────────── */
+    .key-influence { background: var(--surface2); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 1.2rem 1.4rem; margin: 2rem 0; }
+    .key-influence .ki-label { font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: .5rem; }
+    .key-influence .ki-card { font-size: .90rem; font-weight: 500; color: var(--text); margin-bottom: .6rem; }
+    .key-influence p { font-size: .93rem; color: rgba(245,240,232,.85); line-height: 1.72; }
+
+    .the-tell { background: var(--surface2); border-left: 3px solid var(--moon-solid); border-radius: 0 8px 8px 0; padding: 1.2rem 1.4rem; margin: 2rem 0; }
+    .the-tell .tell-label { font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--moon); margin-bottom: .5rem; }
+    .the-tell .tell-card { font-size: .90rem; font-weight: 500; color: var(--text); margin-bottom: .6rem; }
+    .the-tell p { font-size: .93rem; color: rgba(245,240,232,.85); line-height: 1.72; margin-bottom: .6rem; }
+    .the-tell p:last-child { margin-bottom: 0; }
+
+    /* ─── ORACLE CARDS ──────────────────────────────────────── */
+    .oracle-card { background: var(--surface); border: 1px solid var(--border-moon); border-radius: 10px; padding: 1.4rem 1.5rem; margin-bottom: 1.5rem; }
+    .oracle-label { font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--moon); margin-bottom: .35rem; }
+    .oracle-card-name { font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: .15rem; }
+    .oracle-suit { font-size: .72rem; color: var(--text-muted); margin-bottom: .85rem; letter-spacing: .04em; }
+    .oracle-card p { font-size: .96rem; color: rgba(245,240,232,.85); line-height: 1.78; margin-bottom: .7rem; }
+    .oracle-card p:last-child { margin-bottom: 0; }
+    .oracle-sub-eyebrow { font-size: .68rem; letter-spacing: .20em; text-transform: uppercase; color: var(--moon); margin: 2.5rem 0 1.2rem; opacity: .75; }
+
+    /* ─── CALLOUT BLOCKS ────────────────────────────────────── */
+    .callout {
+      background: var(--surface2); border: 1px solid rgba(201,168,76,.22);
+      border-radius: 8px; padding: 1.1rem 1.3rem; margin: 1.5rem 0;
+      font-size: .97rem; color: rgba(245,240,232,.88); line-height: 1.75; font-style: italic;
+    }
+    /* Tea spill — moon blue accent, warmer */
+    .callout.tea {
+      border-color: var(--border-moon);
+      background: rgba(22,32,48,.95);
+      font-style: normal;
+    }
+    .callout.tea::before {
+      content: '☕';
+      display: block; font-style: normal; font-size: .75rem;
+      margin-bottom: .5rem; opacity: .6;
+    }
+    /* Correlation — highlight when cards echo across readings */
+    .callout.echo {
+      border-color: rgba(180,80,60,.45);
+      background: rgba(180,80,60,.07);
+      font-style: normal;
+    }
+    .callout.echo::before {
+      content: '↺  ECHO ACROSS READINGS';
+      display: block; font-size: .62rem; letter-spacing: .18em;
+      text-transform: uppercase; color: rgba(220,140,100,.75);
+      margin-bottom: .55rem; font-style: normal;
+    }
+
+    /* ─── SHADY CLUSTER ─────────────────────────────────────── */
+    .shady-cluster-block {
+      background: rgba(22,32,48,.95);
+      border: 1px solid var(--border-moon);
+      border-radius: 10px; padding: 1.5rem 1.5rem; margin: 2rem 0;
+    }
+    .shady-cluster-block .sc-label {
+      font-size: .65rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--moon); margin-bottom: .8rem;
+    }
+    .shady-cluster-block .sc-cards {
+      display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1rem; align-items: center;
+    }
+    .shady-cluster-block .sc-card {
+      background: rgba(107,159,197,.12); border: 1px solid rgba(107,159,197,.30);
+      border-radius: 4px; padding: .25rem .65rem; font-size: .80rem; color: var(--moon);
+    }
+    .shady-cluster-block .sc-plus { color: var(--text-muted); font-size: .85rem; }
+    .shady-cluster-block p { font-size: .95rem; color: rgba(245,240,232,.82); line-height: 1.75; margin-bottom: .75rem; }
+    .shady-cluster-block p:last-child { margin-bottom: 0; }
+    .shady-verdict {
+      display: inline-block; font-size: .72rem; letter-spacing: .12em;
+      text-transform: uppercase; padding: .3rem .8rem;
+      border-radius: 3px; margin-bottom: .85rem; font-weight: 500;
+    }
+    .shady-verdict.not-shady { background: rgba(100,160,100,.12); color: rgba(130,190,130,.80); border: 1px solid rgba(100,160,100,.25); }
+    .shady-verdict.complicated { background: rgba(200,160,60,.10); color: rgba(220,185,80,.80); border: 1px solid rgba(200,160,60,.22); }
+
+    /* ─── ORACLE ART BREAK ──────────────────────────────────── */
+    .oracle-art-wrap { width: 100%; margin: 0; position: relative; overflow: hidden; }
+    .oracle-art-img { width: 100%; max-height: 500px; object-fit: cover; object-position: center 20%; display: block; }
+    .oracle-art-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(12,17,23,.90));
+      padding: 1.5rem clamp(1.25rem, 5vw, 2rem) 1rem;
+      font-size: .70rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold);
+    }
+
+    /* ─── SPREAD PHOTO ──────────────────────────────────────── */
+    .spread-photo-wrap { width: 100%; margin: 1.75rem 0; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; }
+    .spread-photo-wrap img { width: 100%; display: block; transition: transform .35s ease; }
+    .spread-photo-wrap:hover img { transform: scale(1.015); }
+    .spread-photo-wrap.zoomed {
+      position: fixed; inset: 0; z-index: 500; border-radius: 0; cursor: zoom-out;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(5,9,14,.95); margin: 0; padding: 1.5rem;
+    }
+    .spread-photo-wrap.zoomed img { max-width: 100%; max-height: 100%; object-fit: contain; transform: none; border-radius: 6px; }
+    .spread-photo-caption {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: .5rem .85rem;
+      background: linear-gradient(transparent, rgba(12,17,23,.75));
+      font-size: .68rem; letter-spacing: .10em; text-transform: uppercase; color: var(--text-muted);
+      display: flex; justify-content: space-between;
+    }
+
+    /* ─── SYNTHESIS ─────────────────────────────────────────── */
+    .synthesis-block { padding: 3rem 0; }
+    .synthesis-block p { font-size: 1rem; color: rgba(245,240,232,.85); line-height: 1.80; margin-bottom: 1rem; }
+    .synthesis-block p:last-child { margin-bottom: 0; }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
+    .site-footer { padding: 2.5rem clamp(1.25rem, 5vw, 2rem); border-top: 1px solid var(--border); text-align: center; }
+    .expiry-notice { font-size: .75rem; color: var(--text-muted); letter-spacing: .06em; margin-bottom: .6rem; }
+    .footer-brand { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); opacity: .65; }
+
+    /* ─── DECK NOTES ────────────────────────────────────────── */
+    .deck-notes-block {
+      background: var(--surface2);
+      border-top: 1px solid var(--border);
+      padding: 5rem 1.5rem 4rem;
+    }
+    .deck-notes-block .deck-chip {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(201,168,76,.10); border: 1px solid rgba(201,168,76,.25);
+      border-radius: 99px; padding: .3rem .9rem;
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.75rem;
+    }
+    .deck-notes-block h2.deck-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700; line-height: 1.25;
+      color: var(--text); margin-bottom: 1.5rem;
+    }
+    .deck-notes-block p {
+      font-size: 1rem; line-height: 1.85;
+      color: rgba(240,232,215,.88); margin-bottom: 1.25rem;
+    }
+    .deck-notes-block p:last-child { margin-bottom: 0; }
+    .deck-trait-list {
+      list-style: none; padding: 0; margin: 1.75rem 0;
+      display: flex; flex-direction: column; gap: .6rem;
+    }
+    .deck-trait-list li {
+      display: flex; gap: .85rem; align-items: flex-start;
+      font-size: .93rem; color: rgba(240,232,215,.82); line-height: 1.7;
+    }
+    .deck-trait-list li .trait-bullet {
+      flex-shrink: 0; margin-top: .28rem;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); opacity: .55;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .brand-bar nav { display: none; }
+      .hero-section { height: 75vh; }
+      .blog-title { letter-spacing: -.01em; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- EXPIRED SCREEN -->
+<div id="expired-screen">
+  <img src="hero-reveal.jpg" alt="Readings by Jaylon" class="expired-art">
+  <h2>This reading has closed.</h2>
+  <p>Bookmark this link &mdash; it updates when the next one goes up. There&rsquo;s always another week.</p>
+  <p class="brand-expired">Readings by Jaylon</p>
+</div>
+
+<!-- LIVE CONTENT -->
+<div id="live-content">
+
+  <header class="brand-bar">
+    <span class="brand-mark">Readings by Jaylon</span>
+    <nav>
+      <a href="#this-week">This Week</a>
+      <a href="#the-mirror">The Mirror</a>
+      <a href="#the-thread">The Thread</a>
+      <a href="#synthesis">Verdict</a>
+      <a href="#deck-notes">The Deck</a>
+    </nav>
+  </header>
+
+  <section class="hero-section">
+    <img src="hero-main.jpg" class="hero-img" alt="Fate &amp; Commentary">
+    <div class="hero-overlay">
+      <div class="hero-week">Week of April 7, 2026</div>
+      <h1 class="blog-title">Fate <span class="amp">&amp;</span><br>Commentary</h1>
+      <div class="hero-tagline">We&rsquo;re looking at someone. Sibilla &amp; Kipper &amp; Oracle Citadel &amp; the truth.</div>
+    </div>
+  </section>
+
+  <!-- ── INTRO ─────────────────────────────────────────────── -->
+  <div class="blog-intro reveal">
+    <div class="container">
+      <span class="star-child-greeting">Welcome, Star Child.</span>
+      <p>This week I did something I&rsquo;ve been working up to for a while: I pulled cards on someone who isn&rsquo;t me. A man from my life. I&rsquo;m not going to name him, but if you know my situation, you&rsquo;ll probably recognize him by the time we hit Position 3. If you don&rsquo;t know my situation, the cards will introduce him properly and you can form your own theory.</p>
+      <p>I ran two back-to-back readings. First: <strong>The Mirror</strong> &mdash; a nine-card psychological profile that maps who he actually is as a person, independent of anything between us. Then: <strong>The Thread</strong> &mdash; a ten-card connection reading that looks at what&rsquo;s actually happening between us, underneath the surface. I also did my week-ahead, which is linked below if you want the full read. Let me give you the quick version of the week first before we get into the main event.</p>
+    </div>
+  </div>
+
+  <!-- ── VIBE CHECK ─────────────────────────────────────────── -->
+  <div class="vibe-check reveal" id="this-week">
+    <div class="container">
+      <div class="vibe-inner">
+        <div class="vibe-eyebrow">Week Ahead &mdash; Sibilla &amp; Oracle Citadel</div>
+        <div class="vibe-heading">This Week&rsquo;s Energy</div>
+        <div class="vibe-ki">
+          <span class="vibe-ki-label">Key Influence</span>
+          <span class="vibe-ki-card">Frivolity</span>
+        </div>
+        <p class="vibe-prose">Frivolity showed up at the bottom of my Sibilla deck, which means it&rsquo;s the spirit-level energy running underneath the whole week without announcing itself. What Frivolity actually does in this system is reduce the weight of everything around it &mdash; it&rsquo;s the deck telling me &ldquo;don&rsquo;t be so heavy about this.&rdquo; The rest of the week has reunion energy, some blocked hope and joy, but it lands on Surprise and Consolation in synthesis. Lighter week. After the one before it, I&rsquo;ll take it.</p>
+        <!-- NOTE FOR PERPLEXITY: week.html = the generated week-ahead reading HTML, renamed and placed in this folder -->
+        <a href="week.html" class="vibe-btn">Read the full week&nbsp;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BRIDGE ─────────────────────────────────────────────── -->
+  <div class="act-bridge reveal">
+    <div class="container">
+      <p>Okay. Now. Separate from my week &mdash; there&rsquo;s a man. He&rsquo;s not a minor character in my life right now, which is why I pulled cards on him. He&rsquo;s from work, and I&rsquo;ll leave it at that. Some of you already know who I mean. Others will figure it out from the reading, and that&rsquo;s part of the fun. The cards don&rsquo;t care about names. They&rsquo;ll tell you who he is regardless.</p>
+      <p>I want to be clear: I don&rsquo;t have full certainty about which person in my life every card is pointing to. I have a theory. The reading either confirms it or complicates it. Either way, I&rsquo;m publishing it because the cards said what they said, and sitting on a reading that&rsquo;s this interesting felt like a waste.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ THE MIRROR — ACT I ══════════ -->
+  <div class="reading-block reveal" id="the-mirror">
+    <div class="container">
+      <div class="act-label">Act I</div>
+      <div class="section-eyebrow">Sibilla della Zingara &amp; Citadel Oracle</div>
+      <h2 class="section-title">The Mirror</h2>
+      <div class="section-subtitle">Who he is &mdash; 6 positions + 3 Oracle &mdash; independent of us, independent of work</div>
+
+      <div class="spread-photo-wrap">
+        <img src="mirror-reading.jpg" alt="The Mirror spread">
+        <div class="spread-photo-caption"><span>The Mirror &mdash; Psychological Profile</span><span>tap to zoom</span></div>
+      </div>
+
+      <p style="font-size:.90rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.8rem;">Quick note on the decks: The first six positions use the <strong style="color:var(--text);">Sibilla della Zingara</strong>, a 52-card Italian oracle. Think of it as Tarot&rsquo;s more blunt, story-obsessed Italian cousin &mdash; it names things plainly (there&rsquo;s literally a card called &ldquo;Enemy&rdquo;). Reversals soften negatives and complicate positives, but nothing is erased. The last three use the <strong style="color:var(--text);">Citadel Oracle</strong> &mdash; soul-level archetypes with four suits. Reversed there means shadow or excess, not negation. Both energies present, one just louder.</p>
+
+      <!-- Position 1 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">01</span>
+          <span class="position-name">The Mask &mdash; What He Presents to the World</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip reversed">Enemy ↓</span>
+        </div>
+        <div class="position-reading">
+          <p>He leads with friction. That&rsquo;s the first thing. The Enemy card in the Sibilla is specifically a male adversary &mdash; someone who carries falsehood and obstruction, who acts against you directly or not. As a reversed card in the Mask position, the edge is performed more than it&rsquo;s real. He wants to be read as formidable, as someone you shouldn&rsquo;t test. The reversal says: that persona is softening, or was never as solid as it looked.</p>
+          <p>He leads with &ldquo;don&rsquo;t mess with me.&rdquo; But the reversal says that&rsquo;s a costume coming apart at the seams. Keep this in mind when you see what&rsquo;s underneath it.</p>
+        </div>
+      </div>
+
+      <!-- Position 2 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">02</span>
+          <span class="position-name">The Core &mdash; Who He Actually Is</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip">Letter</span>
+        </div>
+        <div class="position-reading">
+          <p>Underneath the Enemy mask: the Letter. In the Sibilla, Letter names awaited news, deliberate communication, change arriving in written form. At his core, this man is a communicator. Not loud &mdash; composed, reaching, someone whose authentic self lives in what he transmits. He&rsquo;s, fundamentally, someone who wants to be received the way a letter wants to arrive.</p>
+          <p>The gap between Position 1 and Position 2 is the whole story. He leads with distance and he is made of the need to connect. He pushes people away with one hand and writes them letters with the other. The rest of this reading will tell us why.</p>
+        </div>
+      </div>
+
+      <!-- Position 3 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">03</span>
+          <span class="position-name">The Pattern &mdash; The Loop He Can&rsquo;t Stop Running</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip">Thief</span>
+        </div>
+        <div class="position-reading">
+          <p>Okay. The Thief upright is a deception card &mdash; someone who plots behind your back, takes what isn&rsquo;t theirs, operates in the shadows of a situation. As a pattern, this lands uncomfortably. His recurring move is taking something that wasn&rsquo;t offered. Not necessarily literally. Relationally: he takes intimacy that hasn&rsquo;t been given freely, trust he hasn&rsquo;t earned, access he hasn&rsquo;t been extended. He repositions himself as though it was always his.</p>
+          <p>There&rsquo;s always another track running underneath his visible behavior. People around him sense it without being able to name it &mdash; that persistent feeling that something isn&rsquo;t being said, that there&rsquo;s a hand in a drawer they can&rsquo;t see. His pattern is covert acquisition. In Tarot terms: the Seven of Swords not as a single act but as a mode of being.</p>
+        </div>
+      </div>
+
+      <div class="callout tea">Let me be honest about something: this card surprised me less than it should have. When the Thief landed in the pattern position, my first reaction wasn&rsquo;t &ldquo;hm, interesting&rdquo; &mdash; it was &ldquo;oh, that tracks.&rdquo; I&rsquo;m noting that.</div>
+
+      <!-- Position 4 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">04</span>
+          <span class="position-name">The Wound &mdash; What&rsquo;s Driving It</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip">Priest</span>
+        </div>
+        <div class="position-reading">
+          <p>The Priest upright names spiritual authority, ritual, devotion &mdash; sacred order. As a wound, this means the framework of meaning itself is where the damage lives. Someone, or some system, claimed to be righteous, morally unimpeachable, the holder of truth &mdash; and used that position to harm. The wound is betrayal by something that should have been trustworthy.</p>
+          <p>Watch how it connects to the Thief. The Thief is what someone builds when they&rsquo;ve learned that power takes from you in the dark and calls it sacred. If the wound is the Priest, the stealing becomes survival logic: take before you can be taken from. Operate in shadows because the people who operate openly are the liars. Every covert move he makes is, at some level, a response to that original violation.</p>
+        </div>
+      </div>
+
+      <!-- Position 5 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">05</span>
+          <span class="position-name">The Desire &mdash; What He&rsquo;s Actually Reaching For</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip reversed">Cheerfulness ↓</span>
+        </div>
+        <div class="position-reading">
+          <p>Cheerfulness upright is one of the warmest Sibilla cards: social life, celebration, the room full of people genuinely glad to see you. Reversed, it becomes forced social performance &mdash; the appearance of celebration without warmth underneath. What he desires is belonging he can&rsquo;t quite access. He wants the warmth. He wants the room where people are actually happy he&rsquo;s there. But the reversal says he can only reach for the performed version because the genuine version is what the Priest wound corrupted.</p>
+          <p>The causal chain is painful: the wound teaches him that authentic sacred community betrays you. So now he wants belonging but only knows how to reach for the counterfeit version. Then he wonders why it never fills him up. Three of Cups reversed as a life goal &mdash; forever chasing the feeling of communion while the method guarantees he&rsquo;ll only get the shallow version.</p>
+        </div>
+      </div>
+
+      <!-- Position 6 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">06</span>
+          <span class="position-name">The Blind Spot &mdash; What He Cannot See About Himself</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip">Wedding</span>
+        </div>
+        <div class="position-reading">
+          <p>Wedding upright is union, commitment, genuine covenant &mdash; the moment you stand in front of something and say <em>I am choosing this</em>. In the Blind Spot position, this card says: everyone around him can see his capacity for real commitment, and he walks past it every single time like it&rsquo;s invisible. The answer to his longing is already in the room. He&rsquo;s the only one who can&rsquo;t see it.</p>
+          <p>The upright orientation matters. This isn&rsquo;t a strained or broken thing. It&rsquo;s a genuinely good capacity, fully present, sitting in the one place he can&rsquo;t look. The tragedy is that the thing the Cheerfulness reversed is chasing is available to him. He just keeps looking everywhere else.</p>
+        </div>
+      </div>
+
+      <!-- Oracle Section -->
+      <div class="oracle-sub-eyebrow">Oracle Citadel &mdash; The Soul Layer</div>
+      <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.7;">All three of his Oracle cards came in reversed. That&rsquo;s significant &mdash; every layer of his deeper self is currently running in shadow expression. The gifts are real but distorted. The call is genuine but being refused.</p>
+
+      <!-- Oracle 7 -->
+      <div class="oracle-card">
+        <div class="oracle-label">Position 7 &mdash; The Gift</div>
+        <div class="oracle-card-name">The Walker <span style="color:var(--moon);font-size:.85rem;">&darr; Reversed</span></div>
+        <div class="oracle-suit">Crowd Suite &mdash; Forward Motion, the Journey Itself</div>
+        <p>The Walker&rsquo;s gift is steady forward progress &mdash; the ability to keep going, to put one foot in front of the other, to embody the journey as its own destination. When he&rsquo;s in his power, his forward motion is a gift to everyone around him. But reversed, the guidebook names it precisely: <em>&ldquo;something keeps making you look back to the past.&rdquo;</em> His gift has become its own trap. He&rsquo;s endlessly walking but never arriving.</p>
+        <p>The Core told us he&rsquo;s a Letter &mdash; someone defined by transmission in motion. Now the Oracle says his highest gift is also motion. His deepest nature is communication-while-moving. But the reversal says the motion has stalled because something unresolved demands his attention before he can genuinely go anywhere. His gift is the ability to walk into what&rsquo;s next. But the past has its hand on his shoulder.</p>
+      </div>
+
+      <!-- Oracle 8 -->
+      <div class="oracle-card">
+        <div class="oracle-label">Position 8 &mdash; The Shadow Running</div>
+        <div class="oracle-card-name">The Storyteller <span style="color:var(--moon);font-size:.85rem;">&darr; Reversed</span></div>
+        <div class="oracle-suit">Troupe Suit &mdash; Narrative, Performance, Meaning-Making</div>
+        <p>Upright, the Storyteller weaves meaning from experience &mdash; turns chaos into something comprehensible. Reversed as shadow, the guidebook warns of someone telling a tale &ldquo;with more embellishments than there should be.&rdquo; As the shadow he&rsquo;s living, this means Elias is telling stories about himself that aren&rsquo;t accurate. The embellishments have grown so thick that even he can&rsquo;t find the truth underneath them.</p>
+        <p>He&rsquo;s constructed a narrative about who he is and why he does what he does &mdash; and that story is the single biggest thing keeping him stuck. The Walker can&rsquo;t walk forward because the Storyteller keeps rewriting the map. The person he&rsquo;s manipulating through narrative is himself.</p>
+      </div>
+
+      <!-- Oracle 9 -->
+      <div class="oracle-card">
+        <div class="oracle-label">Position 9 &mdash; The Invitation</div>
+        <div class="oracle-card-name">The Astronomer <span style="color:var(--moon);font-size:.85rem;">&darr; Reversed</span></div>
+        <div class="oracle-suit">Academy Suit &mdash; Pattern Recognition, Grounded Perspective</div>
+        <p>The Astronomer maps patterns that only become visible when you zoom out far enough. Reversed, the guidebook says: <em>&ldquo;you have zoomed out too far and lost contact with the immediate reality that needs to be addressed.&rdquo;</em> As the Invitation being resisted &mdash; when the Invitation is reversed, the soul is knocking and this person is pretending they&rsquo;re not home.</p>
+        <p>His soul is calling him to genuine perspective, the kind that would let him see his own patterns clearly. He&rsquo;s resisting it by hiding in a false version of that same perspective. He tells himself he already sees the big picture. What he&rsquo;s actually doing is using the view from the tower to avoid being present with the mess on the ground floor. The Astronomer upright doesn&rsquo;t flee life &mdash; they make it navigable. He&rsquo;s being asked to come down and engage. He&rsquo;s staying in the tower and calling it wisdom.</p>
+      </div>
+
+      <div class="callout">The Wedding sits in his blind spot &mdash; enormous, upright, and completely invisible to him. Everyone can see he&rsquo;s capable of the real thing. He&rsquo;s the only one in the room who can&rsquo;t.</div>
+
+    </div>
+  </div><!-- /#the-mirror -->
+
+
+  <!-- VISUAL BREAK -->
+  <div class="oracle-art-wrap">
+    <img src="hero-reveal.jpg" class="oracle-art-img" alt="Fate &amp; Commentary">
+    <div class="oracle-art-caption">The Thread &mdash; What&rsquo;s Actually Between Us</div>
+  </div>
+
+
+  <!-- ══════════ THE THREAD — ACT II ══════════ -->
+  <div class="reading-block reveal" id="the-thread">
+    <div class="container">
+      <div class="act-label">Act II</div>
+      <div class="section-eyebrow">Sibilla della Zingara &amp; Citadel Oracle</div>
+      <h2 class="section-title">The Thread</h2>
+      <div class="section-subtitle">What&rsquo;s between us &mdash; 6 positions + The Tell + 3 Oracle &mdash; the real dynamic</div>
+
+      <div class="spread-photo-wrap">
+        <img src="thread-reading.jpg" alt="The Thread spread">
+        <div class="spread-photo-caption"><span>The Thread &mdash; Connection Reading</span><span>tap to zoom</span></div>
+      </div>
+
+      <p style="font-size:.90rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.8rem;">The Thread adds one extra mechanic: <strong style="color:var(--text);">The Tell</strong> &mdash; the card at the bottom of the Sibilla deck, set aside before shuffling and revealed after positions 1&ndash;6. Think of it as &ldquo;is there something I should know?&rdquo; It&rsquo;s also where I run the honesty check: Veil + Tell + Exchange together. If all three are shadow-coded, I name it directly.</p>
+
+      <!-- Position 1 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">01</span>
+          <span class="position-name">Their Reach &mdash; How He Actually Feels About Me</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip">Enemy</span>
+        </div>
+        <div class="position-reading">
+          <p>Enemy upright. I&rsquo;m going to let that land for a second before I explain it away. The Enemy card &mdash; male adversary, carries falsehood and obstruction &mdash; upright, in the position of his actual orientation toward me. Not ambivalence. Not complexity. The Sibilla naming a posture of opposition as his real frequency.</p>
+          <p>He may not experience it consciously. He may genuinely believe he wishes me well. But something in my existence presents a problem for him, or triggers something that curdles into adversarial energy. His real frequency toward me is not neutral. It has the texture of an adversary, whether he knows it or not.</p>
+        </div>
+      </div>
+
+      <div class="callout echo">
+        The Enemy card appeared in <strong>Position 1 of The Mirror</strong> (reversed, as his Mask) and now in <strong>Position 1 of The Thread</strong> (upright, as his actual orientation toward me). In The Mirror, the Enemy is his social performance &mdash; the face he puts on for the world. In The Thread, it&rsquo;s what he&rsquo;s pointing specifically at me. He performs sharpness to everyone. I&rsquo;m the specific audience. Both decks, same card, same position.
+      </div>
+
+      <!-- Position 2 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">02</span>
+          <span class="position-name">My Reach &mdash; How I Actually Feel About Him</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip reversed">Friend ↓</span>
+        </div>
+        <div class="position-reading">
+          <p>The Friend upright is genuine care, offered freely &mdash; one of the warmest cards in the deck. Reversed, it describes something that looks like friendship but has curdled underneath. Treacherous friendship energy, or self-interested motivation dressed as warmth.</p>
+          <p>Let me be honest with myself here: what this is saying is that whatever genuine care I once had for this person has become complicated by something less clean. Maybe I&rsquo;m maintaining the appearance of goodwill while privately feeling something very different. Maybe I&rsquo;ve talked about this person to others in ways that don&rsquo;t match what I say to their face. None of that makes me a bad person. But the cards are asking me to be honest about what I&rsquo;m actually extending, because it&rsquo;s no longer the clean version.</p>
+        </div>
+      </div>
+
+      <!-- Position 3 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">03</span>
+          <span class="position-name">The Bond &mdash; What Actually Connects Us</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip reversed">Hope ↓</span>
+        </div>
+        <div class="position-reading">
+          <p>Hope reversed: optimism with doubt seeping in. The thing we were both, on some level, waiting for &mdash; the version of this connection that it promised to become &mdash; has not arrived, and the not-arriving is starting to feel like the answer.</p>
+          <p>What actually binds us is a shared disappointment. At some point this relationship carried genuine promise. That promise is the residual thread. But reversed Hope says the thread is thinning. We&rsquo;re both still orbiting a version of this connection that never materialized. What holds us together is the ghost of what this could have been, not what it actually is.</p>
+        </div>
+      </div>
+
+      <!-- Position 4 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">04</span>
+          <span class="position-name">The Veil &mdash; What He&rsquo;s Not Showing Me</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip">Child</span>
+        </div>
+        <div class="position-reading">
+          <p>Child upright &mdash; something new, still forming, tender, not yet fully taken shape. What he&rsquo;s hiding from me is a new beginning. Something in his life is just starting to form. A new relationship, a new plan, a new direction he&rsquo;s quietly cultivating. The Child upright carries innocence and genuine potential &mdash; whatever this new thing is, it&rsquo;s not inherently sinister. It&rsquo;s just private. He&rsquo;s keeping it close because it&rsquo;s still fragile.</p>
+          <p>But context matters. When someone whose actual frequency toward me is adversarial is hiding a new beginning from me, the privacy takes on a different character. It may be strategic. He may be building something he doesn&rsquo;t want me to see because it changes the balance between us. He&rsquo;s quietly tending something new, and he&rsquo;s decided I&rsquo;m not the person he&rsquo;ll share it with while it&rsquo;s still tender.</p>
+        </div>
+      </div>
+
+      <!-- Position 5 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">05</span>
+          <span class="position-name">The Dynamic &mdash; How We Actually Move Together</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip reversed">Melancholy ↓</span>
+        </div>
+        <div class="position-reading">
+          <p>Melancholy reversed: the sustained sadness is beginning to lift. The heaviness between us &mdash; the genuine grief that&rsquo;s been running through our interactions &mdash; is dissipating. Not because the issues resolved. Because the emotional charge is naturally withdrawing.</p>
+          <p>Read alongside Hope reversed in The Bond: the hope is fading and the sadness is following it out the door. These movements are related. When you stop hoping something will become what it promised to be, the grief of its failure starts losing weight. What&rsquo;s left is quieter and emptier &mdash; not dramatic, just increasingly neutral. We are, slowly, both letting go, even if neither of us has said so out loud.</p>
+        </div>
+      </div>
+
+      <!-- Position 6 -->
+      <div class="position-card">
+        <div class="position-header">
+          <span class="position-num">06</span>
+          <span class="position-name">What This Serves &mdash; What This Relationship Is Actually For</span>
+        </div>
+        <div class="card-names">
+          <span class="card-chip reversed">Wife ↓</span>
+        </div>
+        <div class="position-reading">
+          <p>Wife reversed names dissolution &mdash; the breakdown of a partnership structure, someone carrying bad intentions, divorce energy. As the purpose position, this is not ambiguous: this connection, in its current form, is serving the processing of something that once functioned like a partnership coming apart. We&rsquo;re not building together anymore. We&rsquo;re navigating the aftermath of something that stopped working, or the slow recognition that it was never going to work the way it was supposed to.</p>
+          <p>Wife reversed in purpose can also carry &ldquo;bad intentions&rdquo; energy &mdash; which suggests part of what this is teaching me involves recognizing when someone who occupies a caretaker or partner-adjacent role has turned that role toward something less benevolent. This relationship exists to finish something. Not to begin it.</p>
+        </div>
+      </div>
+
+      <!-- The Tell -->
+      <div class="the-tell">
+        <div class="tell-label">The Tell &mdash; Bottom of Deck &mdash; &ldquo;Is there something I should know?&rdquo;</div>
+        <div class="tell-card">Letter &mdash; Upright</div>
+        <p>Letter at the bottom of the deck: awaited news, communication, change arriving in written form. Upright &mdash; information is on its way. Given everything else in this reading (Enemy in their reach, new beginning hidden in the Veil, dissolution as the purpose) &mdash; this Letter likely relates to something being made official or communicated formally. A decision he&rsquo;s made that he hasn&rsquo;t told me yet. News that changes the terms between us.</p>
+        <p>This is not hidden forever. Something is arriving that will make the currently ambiguous explicit. I don&rsquo;t have all the information yet. But I will.</p>
+        <p><em>How it reads against the spread:</em> The Tell confirms rather than complicates. Six positions painted a picture of adversarial undercurrents, fading hope, dissolving partnership. The Letter says: this will not remain ambiguous indefinitely. The Child behind the Veil may be exactly what gets communicated when that Letter arrives.</p>
+      </div>
+
+      <!-- Shady Cluster -->
+      <div class="shady-cluster-block">
+        <div class="sc-label">Honesty Check &mdash; The &ldquo;Is He Being Straight With Me?&rdquo; Cluster</div>
+        <div class="sc-cards">
+          <span class="sc-card">Veil &mdash; Child</span>
+          <span class="sc-plus">+</span>
+          <span class="sc-card">The Tell &mdash; Letter</span>
+          <span class="sc-plus">+</span>
+          <span class="sc-card">Exchange &mdash; Champion ↓</span>
+        </div>
+        <span class="shady-verdict complicated">Verdict: It&rsquo;s Complicated</span>
+        <p>Not a full &ldquo;all three shadow-coded&rdquo; cluster. The Veil (Child) and Tell (Letter) are both upright situation cards &mdash; the concealment here is more about timing and privacy than deliberate deception. The Child is tender, not sinister. The Letter says the information is coming anyway.</p>
+        <p>But the overall reading still shows someone whose actual orientation toward me is adversarial while I&rsquo;ve been extending a friendship that has itself become compromised. The shadiness isn&rsquo;t in the cluster &mdash; it&rsquo;s in the foundational mismatch of Positions 1 and 2. He is not my friend, and I am no longer genuinely his. The reading isn&rsquo;t saying he&rsquo;s running a con. It&rsquo;s saying the connection itself is operating on false premises, and both of us are participating in that dishonesty to varying degrees.</p>
+      </div>
+
+      <!-- Oracle Section -->
+      <div class="oracle-sub-eyebrow">Oracle Citadel &mdash; Motive Layer</div>
+
+      <!-- Oracle 7 -->
+      <div class="oracle-card">
+        <div class="oracle-label">Position 7 &mdash; The Exchange</div>
+        <div class="oracle-card-name">The Champion <span style="color:var(--moon);font-size:.85rem;">&darr; Reversed</span></div>
+        <div class="oracle-suit">Academy Suit &mdash; Fighting for What Matters, Carrying Someone&rsquo;s Banner</div>
+        <p>The Champion carries someone else&rsquo;s banner as though it were their own because they understand that justice has to be defended for everyone, not just those with resources. Reversed in the Exchange position: <em>&ldquo;you are fighting a battle that is not actually yours to fight, or defending a position that, on reflection, does not deserve defending.&rdquo;</em></p>
+        <p>What&rsquo;s being traded in this connection is effort on someone else&rsquo;s behalf that is no longer warranted. I have been carrying a banner for this person &mdash; defending the relationship, expending energy, fighting for something &mdash; and the reversal says that cause does not deserve the defense I&rsquo;m giving it. I am giving Champion-level commitment. The return is Enemy-frequency energy. That is not a fair exchange by any accounting.</p>
+      </div>
+
+      <!-- Oracle 8 -->
+      <div class="oracle-card">
+        <div class="oracle-label">Position 8 &mdash; What&rsquo;s Being Built</div>
+        <div class="oracle-card-name">The Muse <span style="color:rgba(140,190,100,.80);font-size:.85rem;">↑ Upright</span></div>
+        <div class="oracle-suit">Crowd Suit &mdash; Inspiration Through Lived Experience</div>
+        <p>I&rsquo;m going to let this be good. The Muse is the only unambiguously positive card in either of today&rsquo;s readings. Out of nineteen cards across both spreads, one arrived in full power, and it landed in &ldquo;What&rsquo;s Being Built.&rdquo;</p>
+        <p>The Muse arrives uninvited and leaves without warning &mdash; she doesn&rsquo;t care whether the catalyst is pleasant, she just needs an opening. The guidebook: <em>&ldquo;Inspiration is available right now. Pay attention. Make space for it.&rdquo;</em> What this connection is constructing is not a shared structure. It&rsquo;s something inside me: clarity, creative fuel, the kind of understanding that only comes from looking at something you&rsquo;d rather not look at. This situation &mdash; painful as parts of it are &mdash; is producing genuine insight. That&rsquo;s the Muse&rsquo;s work. She doesn&rsquo;t care about comfort. She cares about the opening.</p>
+      </div>
+
+      <!-- Oracle 9 -->
+      <div class="oracle-card">
+        <div class="oracle-label">Position 9 &mdash; The Root Signal</div>
+        <div class="oracle-card-name">The Captain <span style="color:rgba(140,190,100,.80);font-size:.85rem;">↑ Upright</span></div>
+        <div class="oracle-suit">Academy Suit &mdash; Leading from the Front, Setting the Temperature</div>
+        <p>The Captain&rsquo;s defining quality: their calm, or their panic, sets the emotional weather for everyone around them. Upright in the Root Signal, this is the soul-level verdict on what this connection is actually rooted in. Academy suit means the root is growth and learning &mdash; not power dynamics, not earthly survival, not performance. This bond exists, at its deepest, because it is teaching me something about leadership.</p>
+        <p>Specifically: about whose emotional temperature I let set my own. The Enemy energy in Position 1 only affects me to the degree I let it set the terms of my inner life. The Captain says the lesson at the root of all this is learning to lead from the front of my own experience &mdash; to hold steady, to not be destabilized by someone else&rsquo;s adversarial current. Not leadership over him. Leadership over myself.</p>
+      </div>
+
+    </div>
+  </div><!-- /#the-thread -->
+
+
+  <!-- ══════════ SYNTHESIS ══════════ -->
+  <div class="reading-block synthesis-block reveal" id="synthesis">
+    <div class="container">
+      <div class="section-eyebrow">Both Readings Together</div>
+      <h2 class="section-title">So. The verdict.</h2>
+
+      <p>Here&rsquo;s what stands out when you put The Mirror and The Thread side by side: the Enemy card appeared in Position 1 of both readings. In The Mirror, reversed &mdash; his social Mask, the performance of toughness that&rsquo;s coming apart. In The Thread, upright &mdash; his actual orientation toward me specifically. The Mirror told me the Enemy is a costume he wears for the world. The Thread told me I&rsquo;m the specific person he&rsquo;s wearing it at, and upright means without the softening.</p>
+
+      <p>The Mirror gave me his architecture. The Thief pattern, the Priest wound, the Storyteller shadow &mdash; all of that tells me where the adversarial energy comes from. He learned that people who operate in the light are the ones who betray you, so he operates in shadows. He takes before he can be taken from. And the narrative he tells himself about why justifies every covert move. None of that is malicious in a cartoon-villain sense. It&rsquo;s adaptive. It&rsquo;s someone who got hurt by something that was supposed to be trustworthy and built a survival strategy around that wound. The problem is the strategy is now the wound.</p>
+
+      <p>The Thread confirmed the architecture is pointed at me. His reach is Enemy. The connection serves dissolution of a partnership structure. I&rsquo;ve been extending a reversed Friend &mdash; the appearance of goodwill that has, somewhere along the way, curdled. And I&rsquo;ve been playing reversed Champion &mdash; carrying a banner for this connection that the connection stopped warranting.</p>
+
+      <div class="callout tea">The Muse upright is the only clean card across both readings. Nineteen cards total and one arrived without a shadow. It landed in &ldquo;What&rsquo;s Being Built.&rdquo; So whatever this situation is costing me, it&rsquo;s producing something real. I find that annoying and I&rsquo;m also grateful for it.</div>
+
+      <p>The Captain at the root signal is the close: this bond exists to teach me how to lead myself. To hold my own emotional temperature. To not let someone else&rsquo;s adversarial current set the terms of my inner weather. That&rsquo;s not a lesson you can learn from a comfortable relationship. It has to come from exactly this kind of friction.</p>
+
+      <p>What I&rsquo;m actually going to do: stop defending a cause that stopped being mine to defend, and pay attention when the Muse knocks &mdash; because apparently she&rsquo;s been using this entire situation as raw material.</p>
+
+    </div>
+  </div><!-- /#synthesis -->
+
+
+  <!-- ══════════ DECK NOTES ══════════ -->
+  <div class="deck-notes-block reveal" id="deck-notes">
+    <div class="container">
+      <div class="deck-chip">🃏 Reader&rsquo;s Notes &mdash; Week of April 6</div>
+      <h2 class="deck-title">Okay, but can we talk about the Sibilla for a second?</h2>
+
+      <p>This week every client&rsquo;s week-ahead reading came through the <em>Sibilla della Zingara</em> &mdash; the Italian Gypsy Oracle. It was the first full week of using it for readings, and I have thoughts. Unfiltered ones, because that&rsquo;s what this blog is for.</p>
+
+      <p>The short version: I don&rsquo;t dislike it. But I&rsquo;d be lying if I said it didn&rsquo;t feel like suddenly being required to speak a third language at work when you were already managing two. You know the grammar, you&rsquo;ve studied the vocabulary, and then someone goes &ldquo;great, now do it faster and with more feeling.&rdquo;</p>
+
+      <ul class="deck-trait-list">
+        <li><span class="trait-bullet"></span><strong>It is more verbose.</strong> Not harder, just&hellip; more. Where Kipper gives you a clean directional sentence, Sibilla hands you a paragraph with subtext. Every card has a person archetype, a situational meaning, and a relational implication, and they don&rsquo;t always point the same direction. You have to triangulate. It&rsquo;s slower in a way that feels deliberate &mdash; like the deck itself is saying, slow down and actually look.</li>
+        <li><span class="trait-bullet"></span><strong>The nuance is genuinely useful.</strong> I kept finding things in the Sibilla pulls that the reading needed but I wouldn&rsquo;t have pulled from Kipper. Gradations of meaning. The difference between &ldquo;something is concealed&rdquo; and &ldquo;something is tender and not yet ready.&rdquo; That distinction matters in a week-ahead context, and the Sibilla was making it where Kipper would have just said <em>hidden.</em></li>
+        <li><span class="trait-bullet"></span><strong>Person cards hit differently.</strong> Sibilla is obsessed with people. Every other card is a person archetype &mdash; Lover, Enemy, Widow, Priest, Constancy. When one of those shows up in a situational position it&rsquo;s almost aggressive in how specifically it names the energy. The Friend reversed in The Thread Position 2 was not ambiguous. That card knows exactly what it&rsquo;s describing and will describe it right to your face.</li>
+        <li><span class="trait-bullet"></span><strong>It plays well with the Citadel Oracle.</strong> Honestly this might be the best part. Sibilla sets up the narrative layer &mdash; people, circumstances, dynamics &mdash; and the Citadel moves into the motive/archetypal layer without overlap. They&rsquo;re not competing for the same register. Sibilla tells you what&rsquo;s happening. Citadel tells you what it means. That pairing feels intentional now that I&rsquo;ve worked it across multiple readings.</li>
+      </ul>
+
+      <p>The honest assessment: it&rsquo;s not a deck for people who want a quick answer. It&rsquo;s a deck for people who want the complete answer, which sometimes includes things they were hoping to avoid. Two readings this week confirmed dynamics the clients already knew were there but hadn&rsquo;t fully named yet. The Sibilla named them. Politely but without apology.</p>
+
+      <p>Will I keep using it? Yes. Am I fluent yet? No. But I&rsquo;m starting to feel the shape of the language, and that&rsquo;s usually when things get interesting.</p>
+
+    </div>
+  </div><!-- /#deck-notes -->
+
+
+  <footer class="site-footer">
+    <div class="expiry-notice">This reading is active until April 11, 2026. Bookmark the link &mdash; it updates weekly.</div>
+    <div class="footer-brand">Readings by Jaylon</div>
+  </footer>
+
+</div><!-- /#live-content -->
+
+<script>
+  const EXPIRY_DATE = new Date('2026-04-11T23:59:00');
+  if (new Date() > EXPIRY_DATE) {
+    document.getElementById('live-content').style.display = 'none';
+    document.getElementById('expired-screen').style.display = 'flex';
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  document.querySelectorAll('.spread-photo-wrap img').forEach(img => {
+    img.addEventListener('click', e => { e.stopPropagation(); img.closest('.spread-photo-wrap').classList.add('zoomed'); });
+  });
+  document.querySelectorAll('.spread-photo-wrap').forEach(w => {
+    w.addEventListener('click', e => { if (e.target === w) w.classList.remove('zoomed'); });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.spread-photo-wrap.zoomed').forEach(w => w.classList.remove('zoomed'));
+  });
+</script>
+
+</body>
+</html>
