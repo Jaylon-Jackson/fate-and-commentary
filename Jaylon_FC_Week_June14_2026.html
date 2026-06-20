@@ -61,6 +61,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 .section-divider{display:flex;align-items:center;gap:1rem;max-width:900px;margin:0 auto 3rem;padding:0 2rem}
 .divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(201,148,58,.3),transparent)}
 .divider-glyph{color:var(--gold);font-size:.7rem}
+.deck-opener{position:relative;z-index:1;max-width:900px;margin:0 auto 5rem;padding:0 2rem}
+.deck-opener-img{width:100%;display:block;border-radius:4px;border:1px solid rgba(201,148,58,.18);filter:contrast(1.12) saturate(1.2) brightness(.92)}
+.deck-opener-caption{font-family:"DM Mono",monospace;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,148,58,.35);margin-top:.8rem;text-align:center}
 .before-card{position:relative;z-index:1;max-width:900px;margin:0 auto 5rem;padding:0 2rem}
 .before-inner{background:linear-gradient(135deg,rgba(201,148,58,.07),rgba(92,45,94,.07));border:1px solid rgba(201,148,58,.2);border-radius:4px;padding:3rem;position:relative;overflow:hidden}
 .before-inner::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--plum),var(--gold),var(--rust))}
@@ -110,17 +113,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 .verdict-chip.partial{background:rgba(180,120,60,.08);color:rgba(212,155,90,.85);border:1px solid rgba(180,120,60,.22)}
 .verdict-card-name{font-family:"Cormorant Garamond",serif;font-size:1rem;font-weight:500;color:var(--bone);margin-bottom:.35rem}
 .verdict-text{font-size:.92rem;color:rgba(245,240,232,.78);line-height:1.78}
-.spread-photo-wrap{position:relative;margin-bottom:2.5rem;border-radius:6px;overflow:hidden;border:1px solid rgba(201,148,58,.18);cursor:zoom-in;background:var(--ink)}
-.spread-photo-wrap img{width:100%;display:block;transition:filter .4s;filter:contrast(1.08) saturate(1.12) brightness(.96)}
-.spread-photo-wrap:hover img{filter:contrast(1.14) saturate(1.22) brightness(1.02)}
-.spread-photo-wrap::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(14,12,10,.45));pointer-events:none}
-.spread-photo-caption{position:absolute;bottom:0;left:0;right:0;padding:.9rem 1.3rem;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;background:linear-gradient(to top,rgba(14,12,10,.75),transparent)}
-.caption-label{font-family:"DM Mono",monospace;font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,240,232,.5)}
-.caption-tap{font-family:"DM Mono",monospace;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(201,148,58,.4)}
-.spread-photo-wrap.zoomed{position:fixed;inset:0;z-index:500;border-radius:0;border:none;cursor:zoom-out;display:flex;align-items:center;justify-content:center;background:rgba(10,8,6,.97);margin:0}
-.spread-photo-wrap.zoomed img{width:auto;height:auto;max-width:96vw;max-height:94vh;filter:contrast(1.12) saturate(1.18) brightness(1) sepia(.02);object-fit:contain}
-.spread-photo-wrap.zoomed::after{display:none}
-.spread-photo-wrap.zoomed .spread-photo-caption{display:none}
 @media(max-width:680px){.reader-section{grid-template-columns:1fr}.sigil-wrap{display:none}}
 .pdf-btn{font-family:"DM Mono",monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-dim);border:1px solid rgba(201,148,58,.25);background:none;padding:.4rem .9rem;border-radius:2rem;cursor:pointer;transition:all .3s}
 .pdf-btn:hover{color:var(--gold);border-color:rgba(201,148,58,.5)}
@@ -186,6 +178,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 
 <div class="section-divider"><div class="divider-line"></div><div class="divider-glyph">◆</div><div class="divider-line"></div></div>
 
+<div class="deck-opener reveal">
+  <img class="deck-opener-img" src="deck-opening.jpg" alt="The three decks before any cards are pulled">
+  <div class="deck-opener-caption">The decks, before anything gets turned over.</div>
+</div>
+
 <div class="before-card" id="opening">
   <div class="before-inner">
     <div class="before-label">Before the Week · The Annotator's Note</div>
@@ -208,16 +205,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 <div class="reading-section">
 <div class="section-tag ora">Deck Introduction</div>
 <h3>The Animals That Speak Before Words</h3>
-
-<div class="spread-photo-wrap" id="animal-spread-photo">
-  <img src="spirit-animal-spread.jpg" alt="Animal Spirit Oracle — Kim Krans · Wild Unknown">
-  <div class="spread-photo-caption">
-    <span class="caption-label">Animal Spirit Oracle · Wild Unknown · Kim Krans</span>
-    <span class="caption-tap">tap to expand</span>
-  </div>
-</div>
-
-<p>Kim Krans built the Wild Unknown Animal Spirit as a 63-creature oracle organized by actual habitat, not projected vibe — a Shark is Water because it lives in water, full stop. That grounded logic is what makes it useful. The fifth element, Ether, holds seven cards — Phoenix, Sea Serpent, Dragon, the three Eggs, Unicorn — each tied to a chakra. When Ether shows up, spirit is talking at the soul level, not the practical one. These are not comfort cards. They're truth cards.</p>
+<p>The Wild Unknown Animal Spirit is a black-and-white illustrated oracle — 63 creatures, each rendered in Kim Krans' precise ink-and-watercolor style against stark black or white fields. The cards are organized by actual habitat: a Shark is Water because it lives in water, full stop. No projected vibe, no symbolic reach. That grounded logic is what makes it useful. The fifth element, Ether, holds seven cards — Phoenix, Sea Serpent, Dragon, the three Eggs, Unicorn — each tied to a chakra, each illustrated with the same economy: a single creature, minimal color, maximum weight. When Ether shows up, spirit is talking at the soul level, not the practical one. These are not comfort cards. They're truth cards.</p>
 <p>This week's draw is <strong>Fire · Earth · Water</strong> — a descending arc. Spirit hands me fire and asks me to bring it all the way down through the body into feeling. Passion tested by patience, resolved by surrender. That's already a story before I even flip the cards.</p>
 <p><span class="ci ora">Cheetah</span> → <span class="ci ora">Elephant</span> → <span class="ci ora">Dolphin</span>: act with perfect decisive timing, be humbled by the weight of what you carry, arrive at something genuinely sacred. Sprint, honor the lineage, receive. Simple enough. Let's see if I actually did it.</p>
 </div>
@@ -225,8 +213,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 <div class="reading-section">
 <div class="section-tag ora">WA1 · Spirit's Advice</div>
 <h3>Cheetah — The Sprint That Doesn't Hesitate</h3>
-<p><span class="ci ora">Cheetah</span> is Fire medicine at its most precise. Not brute force, not a slow stalk. Cheetah sees the opening and goes — full acceleration, total commitment, no second-guessing. And then — this part matters — it stops. Cheetah doesn't sustain, it bursts and rests.</p>
-<p>Spirit is telling me: the reconnaissance phase is over. There's something I've been circling and studying, and Cheetah doesn't want to hear about my risk assessment anymore. The legs are already moving before the mind catches up. My default is to see the window, calculate odds, check for exits, and then maybe decide. Cheetah finds that exhausting and honestly a little embarrassing.</p>
+<p>Picture the Cheetah card: a single big cat, rendered in stark black lines on a white field, mid-extension in a full sprint. No background detail, no context — just the animal and its motion, taking up the whole frame. The card doesn't ask you to think about what the cheetah is chasing. The point is the movement itself. That's what <span class="ci ora">Cheetah</span> looks like in your hand, and it's exactly what it means.</p>
+<p>Fire medicine at its most precise. Not brute force, not a slow stalk. Cheetah sees the opening and goes — full acceleration, total commitment, no second-guessing. And then — this part matters — it stops. Cheetah doesn't sustain, it bursts and rests. Spirit is telling me: the reconnaissance phase is over. There's something I've been circling and studying, and Cheetah doesn't want to hear about my risk assessment anymore. The legs are already moving before the mind catches up. My default is to see the window, calculate odds, check for exits, and then maybe decide. Cheetah finds that exhausting and honestly a little embarrassing.</p>
 <div class="callout"><p>The advice isn't to be reckless. It's to trust that the preparation already happened and stop treating execution like another research phase.</p></div>
 <div class="guidebook"><div class="guidebook-label">Mechanism</div><p>Fire-element animals in the advice position ask the querent to lead with instinct, not analysis. For someone whose default setting is analysis, this is specifically the hard medicine — the body's intelligence has to outrun the mind's.</p></div>
 </div>
@@ -235,7 +223,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 <div class="section-tag ora">WA2 · The Challenger</div>
 <h3>Elephant — The Weight of Everything You Come From</h3>
 <p>Let me be honest with myself here. <span class="ci ora">Elephant</span> as the Challenger hit when I turned it over, and not in a good-hit way.</p>
-<p>Elephant carries matriarchal wisdom, communal duty, the long memory, bonds that hold. As a Challenger, it's not asking me to fight anything. It's asking me to <em>feel the weight</em> instead of filing it under a concept. Can you carry the lineage — professional, familial, all of it — without turning it into an intellectual framework? Can you let it be heavy instead of managed?</p>
+<p>The Elephant card is one of the larger presences in the deck — a full-body illustration, the animal facing you directly, trunk slightly raised, the sheer mass of it filling the card in a way the smaller creatures don't. You feel the weight just looking at it. Earth element, which means the card's feet are firmly on the ground in a way Cheetah's are decidedly not. Elephant carries matriarchal wisdom, communal duty, the long memory, bonds that hold. As a Challenger, it's not asking me to fight anything. It's asking me to <em>feel the weight</em> instead of filing it under a concept. Can you carry the lineage — professional, familial, all of it — without turning it into an intellectual framework? Can you let it be heavy instead of managed?</p>
 <p>Earth-element Challenger after Fire-element Advice: the sprint gets tested by the ground. Can I be decisive and rooted at the same time? That's actually harder than either one separately.</p>
 <div class="callout"><p>Elephant doesn't want me to slow down. It wants me to carry the full weight while I'm already moving at Cheetah speed. Yeah. Sure.</p></div>
 <div class="guidebook"><div class="guidebook-label">Mechanism</div><p>Elephant in the Challenger position names a habit of converting emotional, ancestral, and communal weight into concepts to manage from a distance. The challenge is to let the heaviness be heavy — communal duty, showing up for the collective — without narrating it into something lighter.</p></div>
@@ -245,8 +233,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 <div class="section-tag ora">WA3 · The Final Outcome</div>
 <h3>Dolphin — The Blessing That Arrives When You're Ready</h3>
 <p>I'm going to let this be good.</p>
-<p><span class="ci ora">Dolphin</span> is one of the most unambiguously positive cards in the entire Kim Krans system. Profound blessing arriving, sacred play, communication as pure joy. The card literally says something deeply good is on its way right now. Water-element, relational, felt — whatever this is, I'm going to feel it, not just observe it and take notes about it.</p>
-<p>Dolphin closing after Cheetah and Elephant is a specific arc: act without hesitation, get tested by real weight, arrive somewhere that actually touches the heart. Fire into Earth into Water is a landing, not a fall. Speed becomes rootedness becomes grace.</p>
+<p>The Dolphin card is one of the few in this deck where the energy of the illustration itself just feels different. Most Wild Unknown cards are solitary — one creature, stark field, meditative. The Dolphin has a lightness to it, a sense of upward motion, the animal caught mid-arc as if it just broke the surface. Water element, which means whatever this is, I'm going to feel it, not just observe it and take notes about it. <span class="ci ora">Dolphin</span> is one of the most unambiguously positive cards in the entire Kim Krans system. Profound blessing arriving, sacred play, communication as pure joy.</p>
+<p>Dolphin closing after Cheetah and Elephant is a specific arc: act without hesitation, get tested by real weight, arrive somewhere that actually touches the heart. Fire into Earth into Water is a landing, not a fall.</p>
 <div class="callout"><p>Sprint without hesitation. Carry the full weight while you do it. Arrive at something that makes the whole thing worth it — and actually let yourself feel it.</p></div>
 </div>
 
@@ -262,19 +250,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 </div>
 <div class="reading-text">
 
-<div class="spread-photo-wrap" id="sibilla-spread">
-  <img src="mirror-reading-enhanced.jpg" alt="Sibilla spread — Week of June 14">
-  <div class="spread-photo-caption">
-    <span class="caption-label">Sibilla della Zingara · June 14 spread</span>
-    <span class="caption-tap">tap to expand</span>
-  </div>
-</div>
-
 <div class="reading-section">
 <div class="section-tag kip">Position 1 · The Tone</div>
 <h3>Fortune Reversed + Reunion — Lucky Streak on Hold, But Something Comes Back</h3>
-<p><span class="ci kip">Fortune (Reversed)</span> is normally the best card in this whole deck — the one that makes everything around it shine. Reversed, it's saying: the golden wind is not blowing your way this week. Luck isn't reliable. The easy path isn't on the menu. Effort over fortune, basically.</p>
-<p>But <span class="ci kip">Reunion</span> is sitting next to it upright, and that changes the frame completely. Reunion is the return of something lost — peace after conflict, finding what went missing. The pair together says: things feel harder than usual, the charmed life is on pause, but within all that something returns. The reunion won't just fall into my lap (Fortune reversed made sure of that) — I have to actually reach for it.</p>
+<p><span class="ci kip">Fortune (Reversed)</span> is normally the best card in this whole deck — the one that makes everything around it shine. The card itself is lush: a woman at a spinning wheel, golden light, everything about it suggests good things flowing freely. Reversed, that wheel is stuck. The golden wind is not blowing your way this week. Luck isn't reliable. The easy path isn't on the menu.</p>
+<p>But <span class="ci kip">Reunion</span> is sitting next to it upright, and that changes the frame completely. Reunion shows two figures embracing after separation — warmth, the specific relief of something returning. The pair together says: things feel harder than usual, the charmed life is on pause, but within all that something returns. The reunion won't just fall into my lap — I have to actually reach for it.</p>
 <div class="callout"><p>The week's emotional weather: luck is off, but reunion is on. What was lost can come back. It just won't come back for free.</p></div>
 </div>
 
@@ -282,15 +262,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 <div class="section-tag kip">Position 2 · What Opens</div>
 <h3>Despair + Service Reversed — The Ego Wound Is the Door</h3>
 <p>I had words with this position when I turned it over.</p>
-<p><span class="ci kip">Despair</span> in the Sibilla is specifically jealousy-driven crisis — <em>Disparato per gelosia</em>. Not just general sadness. The specific sting of watching someone else have the thing. That this card lands in What Opens means the jealousy is the <em>opening</em>. The opportunity is in naming the sting instead of intellectualizing past it. Which, for me, is a whole project on its own.</p>
-<p><span class="ci kip">Service reversed</span> beside it: support that's supposed to be working isn't. Either someone meant to be in my corner is quietly doing the opposite, or — and this is the more honest read — my own system for taking care of myself has a hole in it I haven't noticed yet.</p>
+<p><span class="ci kip">Despair</span> — <em>Disparato per gelosia</em> — is a dramatic card even by Sibilla standards: a figure in visible distress, hands raised, the posture of someone undone. And the Italian title nails it down specifically: this isn't generalized sadness, this is jealousy-driven crisis. The specific sting of watching someone else have the thing. That this card lands in What Opens means the jealousy is the <em>opening</em>. The opportunity is in naming the sting instead of intellectualizing past it.</p>
+<p><span class="ci kip">Service reversed</span> beside it: support that's supposed to be working isn't. Either someone meant to be in my corner is quietly doing the opposite, or — the more honest read — my own system for taking care of myself has a hole in it I haven't noticed yet.</p>
 <div class="callout"><p>The week's gift arrives wrapped in something uncomfortable: look at what stings, and look at what's been quietly not working behind the scenes. Both are information, not punishment.</p></div>
 </div>
 
 <div class="reading-section">
 <div class="section-tag kip">Position 3 · What Presses</div>
 <h3>Waiting + Surprise — The Delay Has a Gift Inside It</h3>
-<p><span class="ci kip">Waiting (Belvedere)</span> — delays, patience, the thing I want is not arriving on my timeline. <span class="ci kip">Surprise (Consolante sorpresa)</span> upright — something unexpectedly good, things going better than planned.</p>
+<p><span class="ci kip">Waiting (Belvedere)</span> — a figure at a window, looking out, the whole card a portrait of patience not yet rewarded. Delays, the thing I want not arriving on my timeline. <span class="ci kip">Surprise (Consolante sorpresa)</span> upright beside it — a brighter card, something unexpected arriving with good energy.</p>
 <p>Both upright. The friction this week is that I'm being asked to wait, and the waiting itself contains something I didn't plan for that turns out well. The pressure isn't hostile — it's just slow, and the slowness is apparently on purpose. Cheetah is not going to love this position. Elephant absolutely will.</p>
 <div class="guidebook"><div class="guidebook-label">Mechanism</div><p>Both upright in Position 3 means the friction is real but not distorted — delay energy, not obstruction energy. The surprise is genuine. The hardest part is simply not rushing past it.</p></div>
 </div>
@@ -299,9 +279,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 <div class="section-tag kip">Position 4 · A Surprise</div>
 <h3>Scholar Reversed + Enemy — The Expert Isn't, and There's a Man Working Against Me</h3>
 <p>This is where I stop smiling.</p>
-<p><span class="ci kip">Scholar (Reversed)</span> — all the knowledge, none of the application. Analysis that just spins in place and never actually helps with anything. In the Surprise position, this means someone I've been treating as a knowledgeable source is going to reveal that their whole thing is theory with no traction.</p>
-<p><span class="ci kip">Enemy (Il Nemico)</span> — a male adversary. Not "challenging energy." Not "a growth opportunity in human form." A man acting against me, directly or not.</p>
-<p>The surprise: a male figure who presented as a knowledgeable peer reveals himself as oppositional. Or the Scholar reversed energy — spinning, stuck, going nowhere — is literally the <em>tool</em> the Enemy uses. He weaponizes overthinking. Keeps me in my head instead of moving.</p>
+<p><span class="ci kip">Scholar (Reversed)</span> — the Sibilla Scholar is a studious figure surrounded by books and instruments, someone who has accumulated significant knowledge. Reversed, all that knowledge goes nowhere. Analysis that spins in place and never actually helps with anything. In the Surprise position, someone I've been treating as a knowledgeable source is going to reveal that their whole thing is theory with no traction.</p>
+<p><span class="ci kip">Enemy (Il Nemico)</span> — and there he is. The Enemy card in the Sibilla is not ambiguous: a male figure in an adversarial stance, the card's energy directed against the querent. Not "challenging energy." Not "a growth opportunity in human form." A man acting against me, directly or not. The surprise of the week: a male figure who presented as a knowledgeable peer reveals himself as oppositional.</p>
 <div class="callout"><p>Someone is going to surprise me by not being what he said he was. The flavor is masculine, intellectual, and working against my interest. I need to see this without immediately giving him the benefit of the doubt.</p></div>
 <div class="guidebook"><div class="guidebook-label">Mechanism</div><p>Scholar reversed framing Enemy: the adversarial energy arrives wearing the Scholar's mask. The surprise isn't that an enemy exists — it's who was wearing the disguise.</p></div>
 </div>
@@ -309,19 +288,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 <div class="reading-section">
 <div class="section-tag kip">Position 5 · The Friction / Lesson</div>
 <h3>Lord Reversed + Gift — The Charming Man Who Costs You Something Beautiful</h3>
-<p><span class="ci kip">Lord (Reversed)</span> is a specific archetype: the charming man of genuinely poor character. Seductive, unscrupulous, irresponsible. Not a general warning — a named type. In Position 5 this is the week's <em>lesson</em>, which means I'm supposed to learn something through or about this energy.</p>
-<p><span class="ci kip">Gift (Presente di pietre preziose)</span> upright beside him — something genuinely good arriving unexpectedly.</p>
-<p>The lesson is unsettling: something beautiful comes from or through a source I shouldn't trust. The question is whether I can take what's actually valuable without pretending the person handing it to me is safe. Do I reject the gift because the Lord is reversed? Or do I take what's real and keep my eyes open about where it came from?</p>
-<p>Between this and Position 4, a picture is forming: there is a male figure this week who does intellectual authority and charm, turns out to be adversarial, and still somehow has a real gift in the mix. The lesson is discernment — not paranoia, not naivety, but knowing what to take and what to leave.</p>
+<p><span class="ci kip">Lord (Reversed)</span> — the Sibilla Lord upright is a man of standing and charm. Reversed, the charm is still there but the character underneath it isn't. The card has this specific energy of a handsome man who knows exactly what he looks like and has decided that's enough. In Position 5 this is the week's <em>lesson</em>, which means I'm supposed to learn something through or about this energy.</p>
+<p><span class="ci kip">Gift (Presente di pietre preziose)</span> upright beside him — a card showing precious stones being presented, something genuinely good arriving. The lesson is unsettling: something beautiful comes from or through a source I shouldn't trust. The question is whether I can take what's actually valuable without pretending the person handing it to me is safe. Take the gift. Keep my eyes open about where it came from.</p>
 <div class="callout"><p>Take the gift. Don't trust the Lord.</p></div>
 </div>
 
 <div class="reading-section">
 <div class="section-tag kip">Position 6 · The Active Move</div>
 <h3>Falseness + Old Woman Reversed — Find the Old Lie and Say Something About It</h3>
-<p><span class="ci kip">Falseness (Falsita)</span> upright — masks, two-faced insincerity, things not being what they appear. Position 6 is prescriptive: this is what to do. The instruction is to see through the masks. Don't be too trusting. Name what is false.</p>
-<p><span class="ci kip">Old Woman (Reversed)</span> — something old, rigid, past its usefulness, refusing to shift. An established pattern pretending to be stability when it's actually just calcified.</p>
-<p>The pair as an action: there is a long-standing falsehood — something I've been treating as permanent and stable — and I need to look at it directly and call it what it is. The Old Woman reversed doesn't want to move. That's exactly why this position is labeled Active Move.</p>
+<p><span class="ci kip">Falseness (Falsita)</span> upright — a two-faced figure, literally: the card shows a person wearing a mask or presenting two different expressions. Position 6 is prescriptive, so this is an instruction: see through the masks. Don't be too trusting. Name what is false.</p>
+<p><span class="ci kip">Old Woman (Reversed)</span> — the Old Woman card in the Sibilla is an established, rooted figure; upright she's a source of wisdom and continuity. Reversed, that rootedness curdles into rigidity. Something old, past its usefulness, refusing to shift. The pair as an action: there is a long-standing falsehood — something I've been treating as permanent and stable — and I need to look at it directly and call it what it is.</p>
 <div class="callout"><p>Find the thing I've been treating as settled and ask whether it's actually true or just old. Then say something about it out loud.</p></div>
 </div>
 
@@ -329,9 +305,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 <div class="section-tag kip">Position 7 · Where It Lands</div>
 <h3>Misfortune + Cheerfulness — The Wreck and the Block Party After</h3>
 <p>I stared at this pair for a while.</p>
-<p><span class="ci kip">Misfortune (Disgrazia)</span> — disaster, sudden collapse, everything falling apart at once. And then <span class="ci kip">Cheerfulness (L'Allegria)</span> — happiness, celebration, something genuinely worth celebrating.</p>
-<p>Both upright. Both at full force. Left to right: the collapse produces the celebration. Or — and this is also a real read — both things are simply present at the end of the week simultaneously. Real loss or disruption AND real cause for joy, coexisting without canceling each other out.</p>
-<p>I've read enough spreads to know Misfortune + Cheerfulness together usually means something needed to break before the good thing could get in. The tower falls and the light gets in. Except the Misfortune is at full force, not softened. Something actually goes down. And the Cheerfulness is also full force — the joy after it is real, not a consolation prize.</p>
+<p><span class="ci kip">Misfortune (Disgrazia)</span> — disaster, sudden collapse, everything falling apart at once. It's one of the Sibilla's most serious cards: a figure fallen, a scene of visible catastrophe. And then <span class="ci kip">Cheerfulness (L'Allegria)</span> right beside it — a group scene, warmth, celebration, people together in something worth toasting.</p>
+<p>Both upright. Both at full force. Left to right: the collapse produces the celebration. Something goes down. And the Cheerfulness is also full force — the joy after it is real, not a consolation prize. I've read enough spreads to know Misfortune + Cheerfulness together usually means something needed to break before the good thing could get in.</p>
 <div class="callout"><p>The week lands like a building coming down and the neighborhood throwing a block party in the rubble. Both are real. The collapse makes room for something worth celebrating.</p></div>
 </div>
 
@@ -355,47 +330,36 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 </div>
 <div class="reading-text">
 
-<div class="spread-photo-wrap" id="tarot-spread">
-  <img src="thread-reading-enhanced.jpg" alt="Modern Witch Tarot shadow work spread — Week of June 14">
-  <div class="spread-photo-caption">
-    <span class="caption-label">Modern Witch Tarot · shadow work spread</span>
-    <span class="caption-tap">tap to expand</span>
-  </div>
-</div>
-
 <div class="reading-section">
 <div class="section-tag tar">WT1 · The Shadow to Name</div>
 <h3>King of Wands Reversed — The Throne I Built Before I Was Ready</h3>
 <p>Let me be honest with myself here, because this is the card I most want to analyze past.</p>
-<p><span class="ci tar">King of Wands (Reversed)</span> is the shadow of outward mastery. Upright, this King commands vision, creative authority, the ability to lead by sheer force of passionate will. Reversed, he's performing authority he hasn't fully earned yet, or wielding fire without the discipline to sustain it. But — and this is the version that actually landed — he could also just be someone who genuinely has the fire and the vision but hasn't finished building the structure to hold it. The power is real. The seat isn't stable yet.</p>
-<p>That's the honest read. Not that I'm faking it. Not that the fire isn't real. But I've been presenting as fully arrived somewhere I'm still building toward. The gap between the fire I carry and the structure I've built to hold it is exactly where this week's vulnerability lives.</p>
-<p>And yes — this connects directly to the Sibilla's Lord reversed. In a self-reading, the charming man of poor character isn't just an external figure. He's the version of me that performs the confidence, the authority, the vision, without doing the less glamorous foundational work.</p>
+<p>The Modern Witch Tarot's King of Wands is a striking card — a figure seated on a throne decorated with salamanders and lions, holding a wand like a scepter, the whole image radiating confident command. The Modern Witch version updates the classic Rider-Waite figure into someone who reads as contemporary, self-possessed, clearly in charge. Reversed, that throne tilts. The authority is still visually present but something is structurally off — the King is on the seat but the seat isn't fully stable. <span class="ci tar">King of Wands (Reversed)</span> is the shadow of outward mastery. Upright, this King commands vision, creative authority, the ability to lead by sheer force of passionate will. Reversed, the power is real but the seat isn't stable yet.</p>
+<p>That's the honest read. Not that I'm faking it. Not that the fire isn't real. But I've been presenting as fully arrived somewhere I'm still building toward. This also connects directly to the Sibilla's Lord reversed — in a self-reading, the charming man of poor character is the version of me that performs the confidence without doing the less glamorous foundational work.</p>
 <div class="callout"><p>The shadow to name: I've been leading from a throne that isn't finished being built. The fire is real. The structure under it isn't — yet. And I've been acting like it is.</p></div>
 </div>
 
 <div class="reading-section">
 <div class="section-tag tar">WT2 · The Trigger</div>
 <h3>Wheel of Fortune Reversed — When Fate Reminds You Who's Actually Steering</h3>
-<p><span class="ci tar">Wheel of Fortune (Reversed)</span>. The card that normally brings expansion and the sense that things are moving in your favor — turning the other way. Something I expected to flow won't. Something I counted on spinning toward me will spin the other direction.</p>
-<p>This directly mirrors Fortune reversed in Sibilla Position 1. Both decks are saying the same thing from different angles: the lucky wind is not blowing this week. And when luck stops working, the gap between my actual foundation and my performed authority becomes visible. To me. To other people.</p>
-<p>The trigger isn't an enemy or a betrayal. It's just the wheel turning and the turn revealing what was always there — the unfinished parts I'd been hoping luck would cover.</p>
+<p>The Wheel of Fortune card in any tarot deck is a lot of image — a spinning wheel surrounded by symbols, celestial figures at the corners, the whole thing radiating the energy of large forces in motion. The Modern Witch version keeps that density. Reversed, all that turning motion works against you. <span class="ci tar">Wheel of Fortune (Reversed)</span>: the card that normally brings expansion and the sense that things are moving in your favor — turning the other way this week.</p>
+<p>This directly mirrors Fortune reversed in Sibilla Position 1. Both decks are saying the same thing: the lucky wind is not blowing this week. And when luck stops working, the gap between my actual foundation and my performed authority becomes visible. The trigger isn't an enemy or a betrayal — it's just the wheel turning and the turn revealing what was always there.</p>
 <div class="callout"><p>When fortune reverses this week, my first instinct will be to compensate by performing more fire, more authority, more vision. That instinct is the shadow in action. Watch for it.</p></div>
-<div class="guidebook"><div class="guidebook-label">Mechanism</div><p>Wheel reversed (Jupiter blocked) + Fortune reversed in the Sibilla = double confirmation from separate decks. The lucky wind is off. This is the environment where the King of Wands shadow becomes visible. The trigger is environmental — the response is personal.</p></div>
+<div class="guidebook"><div class="guidebook-label">Mechanism</div><p>Wheel reversed (Jupiter blocked) + Fortune reversed in the Sibilla = double confirmation from separate decks. The lucky wind is off. The trigger is environmental — the response is personal.</p></div>
 </div>
 
 <div class="reading-section">
 <div class="section-tag tar">WT3 · The Integration</div>
 <h3>Two of Swords Reversed — Drop the Blindfold and Choose</h3>
-<p><span class="ci tar">Two of Swords (Reversed)</span>. Upright it's the figure at the crossroads with a blindfold on, holding both swords in perfect balance — the deliberate refusal to choose. Reversed, the blindfold comes off. The balance breaks. The stasis ends, one way or another.</p>
-<p>As integration — the path toward actually working with the shadow — this is precise. The King of Wands reversed is performing authority to avoid admitting he hasn't decided what his authority actually rests on. The Wheel reversed strips the luck away and forces the question. The Two of Swords reversed says: stop holding both swords. Drop one. Choose.</p>
-<p>Reversed, this probably won't feel like a graceful decision. It might feel like the decision was made for me rather than by me. Information I was blocking comes in. The stasis I was maintaining by not looking breaks apart. But that's the integration — not building a better performance, but making the real choice about what I'm actually building and letting the rest go.</p>
+<p>The Two of Swords is one of the most recognizable images in any Rider-Waite tradition: a blindfolded figure seated at the edge of water, holding two crossed swords in perfect balance, face turned away from the choice. The Modern Witch version keeps the blindfold, keeps the crossed swords, keeps that feeling of deliberate not-looking. Reversed, the figure tips. The blindfold slips. The balance breaks.</p>
+<p><span class="ci tar">Two of Swords (Reversed)</span> as integration is precise: the King of Wands reversed is performing authority to avoid admitting he hasn't decided what his authority actually rests on. The Wheel reversed strips the luck away and forces the question. The Two of Swords reversed says stop holding both swords. Drop one. Choose. The integration path isn't building a better performance — it's making the real choice and letting the rest go.</p>
 <div class="callout"><p>The integration path: stop holding two positions to avoid committing to one. The blindfold is coming off whether I take it off or not. Better to do it myself.</p></div>
 </div>
 
 <div class="reading-section">
 <div class="section-tag tar">Shadow ↔ Animal Spirit Bridge</div>
 <h3>What the Basement Says to the Rooftop</h3>
-<p>Elephant and King of Wands reversed are talking about the same wound from different elevations. Elephant says carry the full weight in your body, not in your concepts. The reversed King says you've been performing authority that hasn't been grounded in actual foundation. Both are saying the same thing: the fire is real but the earth under it isn't solid yet. Cheetah's sprint only works if the ground holds — you can't run full speed over a gap you've been pretending isn't there.</p>
+<p>Elephant and King of Wands reversed are talking about the same wound from different elevations. Elephant says carry the full weight in your body, not in your concepts. The reversed King says you've been performing authority that hasn't been grounded in actual foundation. Both are saying: the fire is real but the earth under it isn't solid yet. Cheetah's sprint only works if the ground holds — you can't run full speed over a gap you've been pretending isn't there.</p>
 <p>And Dolphin — the blessing at the end — lines up with the Two of Swords reversed: the moment I drop the performance and make the real choice, the blessing can actually land. Sacred joy doesn't come to the performer. It comes to the person who finally stopped.</p>
 </div>
 
@@ -414,10 +378,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 <div class="section-tag syn">✦ The Weave</div>
 <h3>What This Week Is Actually About</h3>
 <p>All three decks are saying the same thing: I have been operating ahead of my own foundation, and this week the gap becomes visible.</p>
-<p>Spirit gives me Cheetah — act decisively — tested by Elephant — carry your real weight — arriving at Dolphin — felt, embodied, genuine blessing. The human level shows luck reversing across both the Sibilla and the Tarot (which I cannot argue with, that's a double lock), a male figure whose intellectual authority is actually adversarial, a Lord whose charm covers bad character but who still has a real gift in the mix, and a week that ends in simultaneous collapse and celebration. The shadow layer names the pattern: unfinished throne, unstable seat, and when the Wheel reverses this week the instability shows. The integration is to drop the performance and actually choose.</p>
-<p>Here's the one truth that connects all of it: Cheetah's sprint only launches from solid ground. Elephant is asking me to make the ground solid by carrying my full weight honestly instead of conceptually. The Sibilla's Falseness + Old Woman reversed in the Active Move tells me exactly how — find the old lie I've been treating as permanent and say something about it. The Two of Swords reversed says the blindfold is coming off either way. And Dolphin and Cheerfulness say that when I actually do this — when I stop performing and build from the real foundation — there is genuine, felt, sacred joy waiting on the other side.</p>
+<p>Spirit gives me Cheetah — act decisively — tested by Elephant — carry your real weight — arriving at Dolphin — felt, embodied, genuine blessing. The human level shows luck reversing across both the Sibilla and the Tarot (double lock, can't argue with it), a male figure whose intellectual authority is actually adversarial, a Lord whose charm covers bad character but who still has a real gift in the mix, and a week that ends in simultaneous collapse and celebration. The shadow layer names the pattern: unfinished throne, unstable seat, and when the Wheel reverses this week the instability shows. The integration is to drop the performance and actually choose.</p>
+<p>Here's the one truth that connects all of it: Cheetah's sprint only launches from solid ground. Elephant is asking me to make the ground solid by carrying my full weight honestly instead of conceptually. The Sibilla's Falseness + Old Woman reversed in the Active Move tells me exactly how — find the old lie I've been treating as permanent and say something about it. The Two of Swords reversed says the blindfold is coming off either way. And Dolphin and Cheerfulness say that when I actually do this — when I stop performing and build from the real foundation — there is genuine, felt, sacred joy waiting.</p>
 <p>Misfortune doesn't soften. Something goes down this week. But every deck agrees it's something that needed to go. The Cheerfulness after is not denial — it's what becomes possible when the false structure clears.</p>
-<p>On the Enemy and the Scholar reversed and the Lord reversed: there may be a real external figure carrying some of this. But in a self-reading I have to be honest — the adversary who weaponizes overthinking, the charming authority who hasn't earned the seat, the intellectual who can't apply his own knowledge — those are also portraits of me on a bad day. The enemy in Position 4 may be real. He may also be the version of me that uses analysis as avoidance and charm as scaffolding.</p>
+<p>One more honest note: on the Enemy and the Scholar reversed and the Lord reversed — there may be a real external figure carrying some of this. But in a self-reading I have to be honest. The adversary who weaponizes overthinking, the charming authority who hasn't earned the seat, the intellectual who can't apply his own knowledge — those are also portraits of me on a bad day. The enemy in Position 4 may be real. He may also be the version of me that uses analysis as avoidance and charm as scaffolding.</p>
 <div class="callout"><p>The single truth: Fortune is off. The throne is unfinished. Something is going to fall apart. And when it does, the real thing — the Dolphin, the Cheerfulness, the Gift — is on the other side. The week asks me to let something collapse that was never built right, and to stop performing authority long enough to actually earn it.</p></div>
 <p>I'm going to let this be good. Not comfortable, not easy — but good. Dolphin doesn't lie. Something genuinely sacred is arriving, and the price of admission is being honest about what I haven't finished building.</p>
 </div>
@@ -447,7 +411,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
   <div>
     <span class="verdict-chip yes">Hit</span>
     <div class="verdict-card-name">Cheetah — The Sprint That Doesn't Hesitate</div>
-    <div class="verdict-text">Monday, June 15. I showed up to work not expecting to be there — I'd genuinely forgotten that my coworker Braylin had a FIFA World Cup shift our department was supporting for the state of Georgia. He'd told us the dates. I just hadn't gone back to check. So Monday was an unplanned call-in with no runway, no prep time, and I had to move immediately. That's Cheetah verbatim. See the gap, go, no second-guessing. And I showed up with something — boss energy that was consistent and visible all week, to the point where I was outpacing my director. That's not a performance. That's what the sprint looks like when it actually lands.</div>
+    <div class="verdict-text">Monday, June 15. I showed up to work not expecting to be there — I'd genuinely forgotten that my coworker Braylin had a FIFA World Cup shift our department was supporting for the state of Georgia. He'd told us the dates. I just hadn't gone back to check. So Monday was an unplanned call-in with no runway, no prep time, and I had to move immediately. That's Cheetah verbatim: see the gap, go, no second-guessing. And I showed up with something — boss energy that was consistent and visible all week, to the point where I was outpacing my director. That's not a performance. That's what the sprint looks like when it actually lands.</div>
   </div>
 </div>
 
@@ -455,7 +419,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
   <div>
     <span class="verdict-chip nuanced">Nuanced</span>
     <div class="verdict-card-name">Elephant — The Weight of Everything You Come From</div>
-    <div class="verdict-text">The reading pointed toward ancestral and emotional weight — the kind of deep familial material I tend to intellectualize. What actually showed up was professional and operational weight. The week just never let up. I was on my feet constantly, schedule rearranged, couldn't be lazy — something always needed more. My usual split (remote Monday and Thursday, in-person otherwise) got completely flipped: I worked in-person Monday through Wednesday because a dentist appointment I'd forgotten about pushed my Reidsville trip from Wednesday to Friday. Three unexpected in-person days. The Elephant was right, the framing was just interior when the actual weight looked like work clothes and a commute. Carrying the herd by being present when you're supposed to be — that tracks. The reading just expected more feelings and got more logistics.</div>
+    <div class="verdict-text">The reading pointed toward ancestral and emotional weight — the kind of deep familial material I tend to intellectualize. What actually showed up was professional and operational weight. The week just never let up. I was on my feet constantly, schedule rearranged, couldn't be lazy — something always needed more. My usual split (remote Monday and Thursday, in-person otherwise) got completely flipped: I worked in-person Monday through Wednesday because a dentist appointment I'd forgotten about pushed my Reidsville trip from Wednesday to Friday. Three unexpected in-person days. The Elephant was right, the framing was just interior when the actual weight looked like work clothes and a commute. The reading's version expected more feelings and got more logistics.</div>
   </div>
 </div>
 
@@ -500,7 +464,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
   <div>
     <span class="verdict-chip partial">Partial</span>
     <div class="verdict-card-name">Position 4 — Scholar Reversed + Enemy</div>
-    <div class="verdict-text">This is the one I can't cleanly confirm. A male adversary wearing intellectual authority as a mask didn't show up as a dramatic confrontation. My relationship with Braylin actually moved the opposite direction this week — he's becoming more open and honest with me, less guarded, which is the opposite of enemy behavior. If there was an Enemy energy present, it was more diffuse — the systems and expectations piling friction from every direction, rather than one specific person. Or the reading was right that this would be a surprise, meaning whatever this figure represents hasn't fully surfaced yet. I'm leaving it open.</div>
+    <div class="verdict-text">This is the one I can't cleanly confirm. A male adversary wearing intellectual authority as a mask didn't show up as a dramatic confrontation. My relationship with Braylin actually moved the opposite direction this week — he's becoming more open and honest with me, less guarded. If there was an Enemy energy present, it was more diffuse — the systems and expectations piling friction from every direction, rather than one specific person. I'm leaving it open.</div>
   </div>
 </div>
 
@@ -516,7 +480,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
   <div>
     <span class="verdict-chip yes">Hit</span>
     <div class="verdict-card-name">Position 6 — Falseness + Old Woman Reversed</div>
-    <div class="verdict-text">The active move was: find the old lie and name it. The old lie this week was a pattern of not going back to check — Braylin's schedule, the dentist appointment, the car. Things I assume are handled because I once handled them. The Old Woman reversed is exactly that pattern: calcified, resistant to change, pretending to be stability when it's actually just rigidity. I didn't get to do the heroic version of this card. The week did it for me by making the consequences visible. Monday morning was the old lie showing up without its mask.</div>
+    <div class="verdict-text">The active move was: find the old lie and name it. The old lie this week was a pattern of not going back to check — Braylin's schedule, the dentist appointment, the car. Things I assume are handled because I once handled them. The Old Woman reversed is exactly that pattern: calcified, resistant to change, pretending to be stability when it's actually just rigidity. I didn't get to do the heroic version of this card. The week did it for me by making the consequences visible.</div>
   </div>
 </div>
 
@@ -524,7 +488,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
   <div>
     <span class="verdict-chip yes">Hit</span>
     <div class="verdict-card-name">Position 7 — Misfortune + Cheerfulness</div>
-    <div class="verdict-text">Both happened. That's the only way to say it. The week was genuinely hard — draining, unrelenting, nothing going smoothly, expenses blowing the budget, plans shifting, three in-person days when I expected one. Sustained pressure where things keep not going your way. That's Misfortune. Then Saturday: Reidsville, the movie, Markel and Natalie, my mom. That's Cheerfulness at full force. The block party in the rubble. Both real, neither canceling the other out.</div>
+    <div class="verdict-text">Both happened. That's the only way to say it. The week was genuinely hard — draining, unrelenting, nothing going smoothly, expenses blowing the budget, plans shifting, three in-person days when I expected one. That's Misfortune. Then Saturday: Reidsville, the movie, Markel and Natalie, my mom. That's Cheerfulness at full force. The block party in the rubble. Both real, neither canceling the other out.</div>
   </div>
 </div>
 </div>
@@ -542,8 +506,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 <div class="section-tag ret">Final Verdict</div>
 <h3>Did Fate Deliver?</h3>
 <p>Yes. The arc — sprint, carry weight, receive blessing — mapped almost exactly onto the shape of the week. Sibilla Position 7 (Misfortune + Cheerfulness) was the most precise card in the entire spread. Fortune reversed locking across both decks was undeniable. Waiting and Surprise in Position 3 both came through on separate counts.</p>
-<p>Where the reading missed slightly: Elephant's framing was too interior. It found the right weight but pointed toward emotional and ancestral processing, when the actual Elephant this week was professional and operational — carrying the department because that's what the moment needed. That's a definition issue in how I read the card, not a wrong card. I've updated the Elephant entry in my reference deck to include communal duty and literal showing up for the herd. Future reads will be sharper on this.</p>
-<p>Position 4 (Scholar Reversed + Enemy) stays open. Either it was diffuse and I didn't see it clearly, it hasn't fully resolved, or it was more systemic than personal this week. I'm leaving it in the file rather than forcing a verdict onto it.</p>
+<p>Where the reading missed slightly: Elephant's framing was too interior. It found the right weight but pointed toward emotional and ancestral processing, when the actual Elephant this week was professional and operational. That's a definition issue in how I read the card, not a wrong card. I've updated the Elephant entry in my reference deck to include communal duty and literal showing up for the herd. Future reads will be sharper on this.</p>
+<p>Position 4 (Scholar Reversed + Enemy) stays open. Either it was diffuse and I didn't see it clearly, it hasn't fully resolved, or it was more systemic than personal. I'm leaving it in the file rather than forcing a verdict onto it.</p>
 <div class="callout"><p>If you're going to read cards for yourself, this is what accountability looks like. You keep the record. You go back. You find out whether the instruments were in tune. Mine were — mostly. And mostly, when we're talking about this many variables across an entire week, is worth something.</p></div>
 </div>
 
@@ -568,10 +532,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(t
 })();
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-document.querySelectorAll('.spread-photo-wrap').forEach(w=>{
-  w.addEventListener('click',()=>w.classList.toggle('zoomed'));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')w.classList.remove('zoomed')});
-});
 </script>
 </body>
 </html>
