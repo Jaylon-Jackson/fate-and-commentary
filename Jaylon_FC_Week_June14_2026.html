@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fate &amp; Commentary · Week of June 14, 2026 · Jaylon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0c0a;--bone:#f5f0e8;--parchment:#ede5d4;--gold:#c9943a;--gold-light:#e8c67a;--gold-dim:#8a6520;--rust:#8b3a1a;--plum:#5c2d5e;--moon:#6b9fc5;--moon-dim:rgba(107,159,197,.25)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--bone);font-family:"Cormorant Garamond",serif;font-size:18px;line-height:1.7;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.25}
+.starfield{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;width:2px;height:2px;background:var(--gold-light);border-radius:50%;opacity:0;animation:twinkle var(--dur,4s) var(--delay,0s) infinite}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(1)}50%{opacity:var(--bright,.6);transform:scale(1.5)}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(to bottom,rgba(14,12,10,.96),transparent);padding:1.2rem 2.5rem;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:"Cinzel Decorative",serif;font-size:.85rem;color:var(--gold);letter-spacing:.2em;text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-family:"DM Mono",monospace;font-size:.65rem;color:var(--gold-dim);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover{color:var(--gold-light)}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:6rem 2rem 4rem;z-index:1}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.38) saturate(.9) sepia(.15)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(14,12,10,.3) 0%,rgba(14,12,10,.55) 60%,rgba(14,12,10,.95) 100%)}
+.hero-glow{position:absolute;width:600px;height:600px;background:radial-gradient(ellipse,rgba(201,148,58,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:pulse-glow 6s ease-in-out infinite;z-index:1}
+@keyframes pulse-glow{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}}
+.hero > *:not(.hero-bg):not(.hero-glow){position:relative;z-index:2}
+.hero-eyebrow{font-family:"DM Mono",monospace;font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;opacity:0;animation:fade-up 1s .3s forwards}
+.hero-greeting{font-size:clamp(1.1rem,3vw,1.4rem);font-weight:300;font-style:italic;color:var(--parchment);margin-bottom:.5rem;opacity:0;animation:fade-up 1s .5s forwards}
+.hero-name{font-family:"Cinzel Decorative",serif;font-size:clamp(2.4rem,7vw,4.8rem);font-weight:700;color:var(--gold);line-height:1.1;margin-bottom:1rem;opacity:0;animation:fade-up 1s .7s forwards;text-shadow:0 0 60px rgba(201,148,58,.3)}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.25rem);font-weight:300;color:rgba(245,240,232,.6);margin-bottom:3rem;opacity:0;animation:fade-up 1s .9s forwards}
+.hero-date-pill{display:inline-flex;align-items:center;gap:.6rem;font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.2em;color:var(--gold-dim);border:1px solid rgba(201,148,58,.3);padding:.5rem 1.2rem;border-radius:2rem;margin-bottom:.75rem;opacity:0;animation:fade-up 1s 1.1s forwards}
+.hero-date-pill::before{content:"◆";color:var(--gold);font-size:.5rem}
+.hero-retro-pill{display:inline-flex;align-items:center;gap:.6rem;font-family:"DM Mono",monospace;font-size:.65rem;letter-spacing:.18em;color:var(--moon);border:1px solid var(--moon-dim);padding:.4rem 1.1rem;border-radius:2rem;margin-bottom:4rem;opacity:0;animation:fade-up 1s 1.25s forwards;background:rgba(107,159,197,.05)}
+.hero-retro-pill::before{content:"↺";font-size:.55rem}
+.scroll-cue{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fade-up 1s 1.5s forwards;z-index:2}
+.scroll-cue span{font-family:"DM Mono",monospace;font-size:.55rem;letter-spacing:.3em;color:var(--gold-dim);text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold-dim),transparent);animation:scroll-drop 2s ease-in-out infinite}
+@keyframes scroll-drop{0%{transform:scaleY(0);transform-origin:top;opacity:1}50%{transform:scaleY(1);transform-origin:top;opacity:1}51%{transform:scaleY(1);transform-origin:bottom;opacity:1}100%{transform:scaleY(0);transform-origin:bottom;opacity:0}}
+@keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reader-section{position:relative;z-index:1;padding:5rem 2rem;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.sigil-wrap{display:flex;justify-content:center}
+.sigil-ring{position:relative;width:220px;height:220px;border-radius:50%;border:1px solid rgba(201,148,58,.3);display:flex;align-items:center;justify-content:center}
+.sigil-ring::before{content:"";position:absolute;inset:8px;border-radius:50%;border:1px solid rgba(201,148,58,.15)}
+.sigil-inner{width:148px;height:148px;border-radius:50%;background:radial-gradient(ellipse at 40% 35%,rgba(201,148,58,.25),rgba(92,45,94,.2),rgba(14,12,10,.9));display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(201,148,58,.25);animation:sigil-glow 6s ease-in-out infinite}
+@keyframes sigil-glow{0%,100%{box-shadow:0 0 30px rgba(201,148,58,.15),inset 0 0 20px rgba(92,45,94,.1)}50%{box-shadow:0 0 50px rgba(201,148,58,.25),inset 0 0 30px rgba(92,45,94,.2)}}
+.orbit{position:absolute;width:220px;height:220px;animation:orbit-spin var(--speed,8s) linear infinite}
+.orbit-dot{position:absolute;width:5px;height:5px;background:var(--gold);border-radius:50%;top:-2.5px;left:50%;transform:translateX(-50%);box-shadow:0 0 8px var(--gold)}
+@keyframes orbit-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.sigil-initial{font-family:"Cinzel Decorative",serif;font-size:3.2rem;color:var(--gold);line-height:1;text-shadow:0 0 30px rgba(201,148,58,.5)}
+.sigil-title{font-family:"DM Mono",monospace;font-size:.5rem;letter-spacing:.25em;color:var(--gold-dim);text-transform:uppercase;margin-top:.3rem}
+.reader-bio h2{font-family:"Cinzel Decorative",serif;font-size:1rem;color:var(--gold);letter-spacing:.15em;margin-bottom:.3rem}
+.reader-bio .reader-tag{font-family:"DM Mono",monospace;font-size:.6rem;color:var(--gold-dim);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.5rem}
+.reader-bio p{font-size:.95rem;color:rgba(245,240,232,.75);line-height:1.8;margin-bottom:1rem}
+.deck-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+.deck-badge{font-family:"DM Mono",monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .7rem;border-radius:2rem;border:1px solid currentColor}
+.deck-badge.tar{color:#6ab89a;border-color:rgba(106,184,154,.4);background:rgba(106,184,154,.05)}
+.deck-badge.sib{color:#b07fd4;border-color:rgba(176,127,212,.4);background:rgba(176,127,212,.05)}
+.deck-badge.mix{color:#d4845a;border-color:rgba(212,132,90,.4);background:rgba(212,132,90,.05)}
+.section-divider{display:flex;align-items:center;gap:1rem;max-width:900px;margin:0 auto 3rem;padding:0 2rem}
+.divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(201,148,58,.3),transparent)}
+.divider-glyph{color:var(--gold);font-size:.7rem}
+.before-card{position:relative;z-index:1;max-width:900px;margin:0 auto 5rem;padding:0 2rem}
+.before-inner{background:linear-gradient(135deg,rgba(201,148,58,.07),rgba(92,45,94,.07));border:1px solid rgba(201,148,58,.2);border-radius:4px;padding:3rem;position:relative;overflow:hidden}
+.before-inner::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--plum),var(--gold),var(--rust))}
+.before-label{font-family:"DM Mono",monospace;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:1.2rem}
+.before-inner p{font-size:1rem;color:rgba(245,240,232,.85);line-height:1.9;margin-bottom:1rem}
+.before-inner p:last-child{margin-bottom:0}
+.reading-main{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 2rem 5rem}
+.layer-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:2.5rem}
+.layer-number{font-family:"Cinzel Decorative",serif;font-size:2.5rem;color:rgba(201,148,58,.2);line-height:1;min-width:2.5rem}
+.layer-info h2{font-family:"Cinzel Decorative",serif;font-size:1.1rem;color:var(--gold);margin-bottom:.2rem}
+.layer-info p{font-family:"DM Mono",monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim)}
+.layer-bar{height:2px;border-radius:1px;flex:1}
+.layer-bar.kip{background:linear-gradient(to right,#5c2d5e,#b07fd4,transparent)}
+.layer-bar.tar{background:linear-gradient(to right,#1a3d2e,#6ab89a,transparent)}
+.layer-bar.ora{background:linear-gradient(to right,#5c2a0e,#d4845a,transparent)}
+.layer-bar.syn{background:linear-gradient(to right,var(--gold-dim),var(--gold),transparent)}
+.layer-bar.ret{background:linear-gradient(to right,rgba(107,159,197,.3),rgba(107,159,197,.8),transparent)}
+.reading-block{margin-bottom:5rem}
+.reading-text{margin-top:1rem}
+.reading-section{margin-bottom:2.8rem;padding-bottom:2.8rem;border-bottom:1px solid rgba(201,148,58,.07)}
+.reading-section:last-child{border-bottom:none;padding-bottom:0}
+.section-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:"DM Mono",monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem}
+.section-tag::before{content:"◈"}
+.section-tag.kip{color:#b07fd4}.section-tag.tar{color:#6ab89a}.section-tag.ora{color:#d4845a}
+.section-tag.syn{color:var(--gold)}.section-tag.syn::before{content:"✦"}
+.section-tag.ret{color:var(--moon)}.section-tag.ret::before{content:"↺"}
+.reading-section h3{font-family:"Cormorant Garamond",serif;font-size:1.25rem;font-weight:500;color:var(--bone);margin-bottom:1.2rem;line-height:1.4}
+.guidebook{border-left:2px solid rgba(201,148,58,.22);padding:1.2rem 1.5rem;margin-bottom:1.8rem;background:rgba(201,148,58,.03);border-radius:0 4px 4px 0}
+.guidebook-label{font-family:"DM Mono",monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.7rem}
+.guidebook p{font-size:.94rem;font-style:italic;color:rgba(245,240,232,.7);line-height:1.85;margin-bottom:.8rem}
+.guidebook p:last-child{margin-bottom:0}
+.reading-section p{font-size:.97rem;color:rgba(245,240,232,.85);line-height:1.9;margin-bottom:1rem}
+.reading-section p:last-child{margin-bottom:0}
+.reading-section strong{color:var(--bone);font-weight:600}
+.reading-section em{color:var(--gold-light);font-style:italic}
+.callout{border-left:2px solid var(--gold);padding:1rem 1.5rem;margin:1.5rem 0;background:rgba(201,148,58,.04);border-radius:0 4px 4px 0}
+.callout p{font-size:1.02rem!important;font-style:italic;color:var(--bone)!important;margin:0!important;line-height:1.75!important}
+.callout.moon{border-left-color:var(--moon);background:rgba(107,159,197,.04)}
+.callout.moon p{color:rgba(245,240,232,.92)!important}
+.ci{font-weight:500;font-style:italic}
+.ci.ora{color:#d4845a}.ci.kip{color:#b07fd4}.ci.tar{color:#6ab89a}
+.verdict-row{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.4rem;padding-bottom:1.4rem;border-bottom:1px solid rgba(201,148,58,.06)}
+.verdict-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.verdict-chip{font-family:"DM Mono",monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .7rem;border-radius:3px;flex-shrink:0;margin-top:.15rem}
+.verdict-chip.yes{background:rgba(100,170,100,.1);color:rgba(140,200,140,.9);border:1px solid rgba(100,170,100,.25)}
+.verdict-chip.nuanced{background:rgba(201,168,76,.08);color:rgba(220,185,80,.85);border:1px solid rgba(201,168,76,.22)}
+.verdict-chip.partial{background:rgba(180,120,60,.08);color:rgba(212,155,90,.85);border:1px solid rgba(180,120,60,.22)}
+.verdict-card-name{font-family:"Cormorant Garamond",serif;font-size:1rem;font-weight:500;color:var(--bone);margin-bottom:.35rem}
+.verdict-text{font-size:.92rem;color:rgba(245,240,232,.78);line-height:1.78}
+.spread-photo-wrap{position:relative;margin-bottom:2.5rem;border-radius:6px;overflow:hidden;border:1px solid rgba(201,148,58,.18);cursor:zoom-in;background:var(--ink)}
+.spread-photo-wrap img{width:100%;display:block;transition:filter .4s;filter:contrast(1.08) saturate(1.12) brightness(.96)}
+.spread-photo-wrap:hover img{filter:contrast(1.14) saturate(1.22) brightness(1.02)}
+.spread-photo-wrap::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(14,12,10,.45));pointer-events:none}
+.spread-photo-caption{position:absolute;bottom:0;left:0;right:0;padding:.9rem 1.3rem;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;background:linear-gradient(to top,rgba(14,12,10,.75),transparent)}
+.caption-label{font-family:"DM Mono",monospace;font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,240,232,.5)}
+.caption-tap{font-family:"DM Mono",monospace;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(201,148,58,.4)}
+.spread-photo-wrap.zoomed{position:fixed;inset:0;z-index:500;border-radius:0;border:none;cursor:zoom-out;display:flex;align-items:center;justify-content:center;background:rgba(10,8,6,.97);margin:0}
+.spread-photo-wrap.zoomed img{width:auto;height:auto;max-width:96vw;max-height:94vh;filter:contrast(1.12) saturate(1.18) brightness(1) sepia(.02);object-fit:contain}
+.spread-photo-wrap.zoomed::after{display:none}
+.spread-photo-wrap.zoomed .spread-photo-caption{display:none}
+@media(max-width:680px){.reader-section{grid-template-columns:1fr}.sigil-wrap{display:none}}
+.pdf-btn{font-family:"DM Mono",monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-dim);border:1px solid rgba(201,148,58,.25);background:none;padding:.4rem .9rem;border-radius:2rem;cursor:pointer;transition:all .3s}
+.pdf-btn:hover{color:var(--gold);border-color:rgba(201,148,58,.5)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media print{nav,body::before,.starfield,.scroll-cue{display:none!important}.hero{min-height:auto;padding:3rem 2rem 2rem}.reading-main,.reading-block{break-inside:avoid}.reveal{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<div class="starfield" id="starfield"></div>
+
+<nav>
+  <a href="#" class="nav-logo">J A Y L O N</a>
+  <ul class="nav-links">
+    <li><a href="#opening">Before</a></li>
+    <li><a href="#week-animal">Animal Spirit</a></li>
+    <li><a href="#week-sibilla">Sibilla</a></li>
+    <li><a href="#week-shadow">Shadow Work</a></li>
+    <li><a href="#synthesis">Synthesis</a></li>
+    <li><a href="#after">After the Fact</a></li>
+  </ul>
+  <button class="pdf-btn" onclick="window.print()">↓ Save PDF</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <img src="hero-reveal.jpg" alt="">
+  </div>
+  <div class="hero-glow"></div>
+  <p class="hero-eyebrow">Fate &amp; Commentary · Self-Reading</p>
+  <p class="hero-greeting">week of</p>
+  <h1 class="hero-name">June 14, 2026</h1>
+  <p class="hero-sub">Animal Spirit · Sibilla della Zingara · Modern Witch Tarot</p>
+  <div class="hero-date-pill">Read: June 14, 2026 &nbsp;·&nbsp; By Jaylon</div>
+  <div class="hero-retro-pill">Reviewed: June 20, 2026 · After the Fact</div>
+  <div class="scroll-cue"><span>Read On</span><div class="scroll-line"></div></div>
+</section>
+
+<section class="reader-section">
+  <div class="sigil-wrap">
+    <div class="sigil-ring">
+      <div class="orbit" style="--speed:12s"><div class="orbit-dot"></div></div>
+      <div class="orbit" style="--speed:20s;width:180px;height:180px;top:20px;left:20px"><div class="orbit-dot" style="background:#b07fd4;box-shadow:0 0 8px #b07fd4"></div></div>
+      <div class="sigil-inner">
+        <div class="sigil-initial">J</div>
+        <div class="sigil-title">Reader</div>
+      </div>
+    </div>
+  </div>
+  <div class="reader-bio">
+    <h2>Jaylon</h2>
+    <div class="reader-tag">Fate &amp; Commentary · Self-Reading</div>
+    <p>I pulled these cards on Sunday June 14 before anything happened, wrote the reading, then sat on it all week. Now it's Saturday the 20th and I'm publishing both — the prediction and what actually went down — so you can weigh in on how seriously any of us should be taking this.</p>
+    <p>Three decks. Three layers. Spirit, human, shadow. You'll get the reading first. Then at the bottom you'll get the receipts.</p>
+    <div class="deck-badges">
+      <span class="deck-badge mix">Animal Spirit</span>
+      <span class="deck-badge sib">Sibilla</span>
+      <span class="deck-badge tar">Tarot</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><div class="divider-line"></div><div class="divider-glyph">◆</div><div class="divider-line"></div></div>
+
+<div class="before-card" id="opening">
+  <div class="before-inner">
+    <div class="before-label">Before the Week · The Annotator's Note</div>
+    <p>Three decks because the truth about a week is never just one thing — you need a few different instruments running at once to hear where the notes are off. This week they came in dissonant. Spirit level says speed and grace. The human-detail deck says there's a man working against me and something I've been trusting that I probably shouldn't be. And the shadow work says I've been performing an authority I haven't actually locked in yet, and the week is about to make that visible.</p>
+    <p>So it's not a chill week. But there's a Dolphin at the end of it. I've been reading long enough to know that when Dolphin closes a spread, something genuinely good is coming. I just have to earn it first.</p>
+  </div>
+</div>
+
+<main class="reading-main">
+
+<!-- ─── LAYER 01: ANIMAL SPIRIT ─────────────────────────────── -->
+<div class="reading-block reveal" id="week-animal">
+<div class="layer-header">
+<div class="layer-number">01</div>
+<div class="layer-info"><h2>Animal Spirit Oracle</h2><p>wild unknown · kim krans · the primal frame</p></div>
+<div class="layer-bar ora"></div>
+</div>
+<div class="reading-text">
+
+<div class="reading-section">
+<div class="section-tag ora">Deck Introduction</div>
+<h3>The Animals That Speak Before Words</h3>
+
+<div class="spread-photo-wrap" id="animal-spread-photo">
+  <img src="spirit-animal-spread.jpg" alt="Animal Spirit Oracle — Kim Krans · Wild Unknown">
+  <div class="spread-photo-caption">
+    <span class="caption-label">Animal Spirit Oracle · Wild Unknown · Kim Krans</span>
+    <span class="caption-tap">tap to expand</span>
+  </div>
+</div>
+
+<p>Kim Krans built the Wild Unknown Animal Spirit as a 63-creature oracle organized by actual habitat, not projected vibe — a Shark is Water because it lives in water, full stop. That grounded logic is what makes it useful. The fifth element, Ether, holds seven cards — Phoenix, Sea Serpent, Dragon, the three Eggs, Unicorn — each tied to a chakra. When Ether shows up, spirit is talking at the soul level, not the practical one. These are not comfort cards. They're truth cards.</p>
+<p>This week's draw is <strong>Fire · Earth · Water</strong> — a descending arc. Spirit hands me fire and asks me to bring it all the way down through the body into feeling. Passion tested by patience, resolved by surrender. That's already a story before I even flip the cards.</p>
+<p><span class="ci ora">Cheetah</span> → <span class="ci ora">Elephant</span> → <span class="ci ora">Dolphin</span>: act with perfect decisive timing, be humbled by the weight of what you carry, arrive at something genuinely sacred. Sprint, honor the lineage, receive. Simple enough. Let's see if I actually did it.</p>
+</div>
+
+<div class="reading-section">
+<div class="section-tag ora">WA1 · Spirit's Advice</div>
+<h3>Cheetah — The Sprint That Doesn't Hesitate</h3>
+<p><span class="ci ora">Cheetah</span> is Fire medicine at its most precise. Not brute force, not a slow stalk. Cheetah sees the opening and goes — full acceleration, total commitment, no second-guessing. And then — this part matters — it stops. Cheetah doesn't sustain, it bursts and rests.</p>
+<p>Spirit is telling me: the reconnaissance phase is over. There's something I've been circling and studying, and Cheetah doesn't want to hear about my risk assessment anymore. The legs are already moving before the mind catches up. My default is to see the window, calculate odds, check for exits, and then maybe decide. Cheetah finds that exhausting and honestly a little embarrassing.</p>
+<div class="callout"><p>The advice isn't to be reckless. It's to trust that the preparation already happened and stop treating execution like another research phase.</p></div>
+<div class="guidebook"><div class="guidebook-label">Mechanism</div><p>Fire-element animals in the advice position ask the querent to lead with instinct, not analysis. For someone whose default setting is analysis, this is specifically the hard medicine — the body's intelligence has to outrun the mind's.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag ora">WA2 · The Challenger</div>
+<h3>Elephant — The Weight of Everything You Come From</h3>
+<p>Let me be honest with myself here. <span class="ci ora">Elephant</span> as the Challenger hit when I turned it over, and not in a good-hit way.</p>
+<p>Elephant carries matriarchal wisdom, communal duty, the long memory, bonds that hold. As a Challenger, it's not asking me to fight anything. It's asking me to <em>feel the weight</em> instead of filing it under a concept. Can you carry the lineage — professional, familial, all of it — without turning it into an intellectual framework? Can you let it be heavy instead of managed?</p>
+<p>Earth-element Challenger after Fire-element Advice: the sprint gets tested by the ground. Can I be decisive and rooted at the same time? That's actually harder than either one separately.</p>
+<div class="callout"><p>Elephant doesn't want me to slow down. It wants me to carry the full weight while I'm already moving at Cheetah speed. Yeah. Sure.</p></div>
+<div class="guidebook"><div class="guidebook-label">Mechanism</div><p>Elephant in the Challenger position names a habit of converting emotional, ancestral, and communal weight into concepts to manage from a distance. The challenge is to let the heaviness be heavy — communal duty, showing up for the collective — without narrating it into something lighter.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag ora">WA3 · The Final Outcome</div>
+<h3>Dolphin — The Blessing That Arrives When You're Ready</h3>
+<p>I'm going to let this be good.</p>
+<p><span class="ci ora">Dolphin</span> is one of the most unambiguously positive cards in the entire Kim Krans system. Profound blessing arriving, sacred play, communication as pure joy. The card literally says something deeply good is on its way right now. Water-element, relational, felt — whatever this is, I'm going to feel it, not just observe it and take notes about it.</p>
+<p>Dolphin closing after Cheetah and Elephant is a specific arc: act without hesitation, get tested by real weight, arrive somewhere that actually touches the heart. Fire into Earth into Water is a landing, not a fall. Speed becomes rootedness becomes grace.</p>
+<div class="callout"><p>Sprint without hesitation. Carry the full weight while you do it. Arrive at something that makes the whole thing worth it — and actually let yourself feel it.</p></div>
+</div>
+
+</div>
+</div>
+
+<!-- ─── LAYER 02: SIBILLA ────────────────────────────────────── -->
+<div class="reading-block reveal" id="week-sibilla">
+<div class="layer-header">
+<div class="layer-number">02</div>
+<div class="layer-info"><h2>Sibilla della Zingara</h2><p>gypsy oracle · the human details · 7 positions</p></div>
+<div class="layer-bar kip"></div>
+</div>
+<div class="reading-text">
+
+<div class="spread-photo-wrap" id="sibilla-spread">
+  <img src="mirror-reading-enhanced.jpg" alt="Sibilla spread — Week of June 14">
+  <div class="spread-photo-caption">
+    <span class="caption-label">Sibilla della Zingara · June 14 spread</span>
+    <span class="caption-tap">tap to expand</span>
+  </div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag kip">Position 1 · The Tone</div>
+<h3>Fortune Reversed + Reunion — Lucky Streak on Hold, But Something Comes Back</h3>
+<p><span class="ci kip">Fortune (Reversed)</span> is normally the best card in this whole deck — the one that makes everything around it shine. Reversed, it's saying: the golden wind is not blowing your way this week. Luck isn't reliable. The easy path isn't on the menu. Effort over fortune, basically.</p>
+<p>But <span class="ci kip">Reunion</span> is sitting next to it upright, and that changes the frame completely. Reunion is the return of something lost — peace after conflict, finding what went missing. The pair together says: things feel harder than usual, the charmed life is on pause, but within all that something returns. The reunion won't just fall into my lap (Fortune reversed made sure of that) — I have to actually reach for it.</p>
+<div class="callout"><p>The week's emotional weather: luck is off, but reunion is on. What was lost can come back. It just won't come back for free.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag kip">Position 2 · What Opens</div>
+<h3>Despair + Service Reversed — The Ego Wound Is the Door</h3>
+<p>I had words with this position when I turned it over.</p>
+<p><span class="ci kip">Despair</span> in the Sibilla is specifically jealousy-driven crisis — <em>Disparato per gelosia</em>. Not just general sadness. The specific sting of watching someone else have the thing. That this card lands in What Opens means the jealousy is the <em>opening</em>. The opportunity is in naming the sting instead of intellectualizing past it. Which, for me, is a whole project on its own.</p>
+<p><span class="ci kip">Service reversed</span> beside it: support that's supposed to be working isn't. Either someone meant to be in my corner is quietly doing the opposite, or — and this is the more honest read — my own system for taking care of myself has a hole in it I haven't noticed yet.</p>
+<div class="callout"><p>The week's gift arrives wrapped in something uncomfortable: look at what stings, and look at what's been quietly not working behind the scenes. Both are information, not punishment.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag kip">Position 3 · What Presses</div>
+<h3>Waiting + Surprise — The Delay Has a Gift Inside It</h3>
+<p><span class="ci kip">Waiting (Belvedere)</span> — delays, patience, the thing I want is not arriving on my timeline. <span class="ci kip">Surprise (Consolante sorpresa)</span> upright — something unexpectedly good, things going better than planned.</p>
+<p>Both upright. The friction this week is that I'm being asked to wait, and the waiting itself contains something I didn't plan for that turns out well. The pressure isn't hostile — it's just slow, and the slowness is apparently on purpose. Cheetah is not going to love this position. Elephant absolutely will.</p>
+<div class="guidebook"><div class="guidebook-label">Mechanism</div><p>Both upright in Position 3 means the friction is real but not distorted — delay energy, not obstruction energy. The surprise is genuine. The hardest part is simply not rushing past it.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag kip">Position 4 · A Surprise</div>
+<h3>Scholar Reversed + Enemy — The Expert Isn't, and There's a Man Working Against Me</h3>
+<p>This is where I stop smiling.</p>
+<p><span class="ci kip">Scholar (Reversed)</span> — all the knowledge, none of the application. Analysis that just spins in place and never actually helps with anything. In the Surprise position, this means someone I've been treating as a knowledgeable source is going to reveal that their whole thing is theory with no traction.</p>
+<p><span class="ci kip">Enemy (Il Nemico)</span> — a male adversary. Not "challenging energy." Not "a growth opportunity in human form." A man acting against me, directly or not.</p>
+<p>The surprise: a male figure who presented as a knowledgeable peer reveals himself as oppositional. Or the Scholar reversed energy — spinning, stuck, going nowhere — is literally the <em>tool</em> the Enemy uses. He weaponizes overthinking. Keeps me in my head instead of moving.</p>
+<div class="callout"><p>Someone is going to surprise me by not being what he said he was. The flavor is masculine, intellectual, and working against my interest. I need to see this without immediately giving him the benefit of the doubt.</p></div>
+<div class="guidebook"><div class="guidebook-label">Mechanism</div><p>Scholar reversed framing Enemy: the adversarial energy arrives wearing the Scholar's mask. The surprise isn't that an enemy exists — it's who was wearing the disguise.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag kip">Position 5 · The Friction / Lesson</div>
+<h3>Lord Reversed + Gift — The Charming Man Who Costs You Something Beautiful</h3>
+<p><span class="ci kip">Lord (Reversed)</span> is a specific archetype: the charming man of genuinely poor character. Seductive, unscrupulous, irresponsible. Not a general warning — a named type. In Position 5 this is the week's <em>lesson</em>, which means I'm supposed to learn something through or about this energy.</p>
+<p><span class="ci kip">Gift (Presente di pietre preziose)</span> upright beside him — something genuinely good arriving unexpectedly.</p>
+<p>The lesson is unsettling: something beautiful comes from or through a source I shouldn't trust. The question is whether I can take what's actually valuable without pretending the person handing it to me is safe. Do I reject the gift because the Lord is reversed? Or do I take what's real and keep my eyes open about where it came from?</p>
+<p>Between this and Position 4, a picture is forming: there is a male figure this week who does intellectual authority and charm, turns out to be adversarial, and still somehow has a real gift in the mix. The lesson is discernment — not paranoia, not naivety, but knowing what to take and what to leave.</p>
+<div class="callout"><p>Take the gift. Don't trust the Lord.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag kip">Position 6 · The Active Move</div>
+<h3>Falseness + Old Woman Reversed — Find the Old Lie and Say Something About It</h3>
+<p><span class="ci kip">Falseness (Falsita)</span> upright — masks, two-faced insincerity, things not being what they appear. Position 6 is prescriptive: this is what to do. The instruction is to see through the masks. Don't be too trusting. Name what is false.</p>
+<p><span class="ci kip">Old Woman (Reversed)</span> — something old, rigid, past its usefulness, refusing to shift. An established pattern pretending to be stability when it's actually just calcified.</p>
+<p>The pair as an action: there is a long-standing falsehood — something I've been treating as permanent and stable — and I need to look at it directly and call it what it is. The Old Woman reversed doesn't want to move. That's exactly why this position is labeled Active Move.</p>
+<div class="callout"><p>Find the thing I've been treating as settled and ask whether it's actually true or just old. Then say something about it out loud.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag kip">Position 7 · Where It Lands</div>
+<h3>Misfortune + Cheerfulness — The Wreck and the Block Party After</h3>
+<p>I stared at this pair for a while.</p>
+<p><span class="ci kip">Misfortune (Disgrazia)</span> — disaster, sudden collapse, everything falling apart at once. And then <span class="ci kip">Cheerfulness (L'Allegria)</span> — happiness, celebration, something genuinely worth celebrating.</p>
+<p>Both upright. Both at full force. Left to right: the collapse produces the celebration. Or — and this is also a real read — both things are simply present at the end of the week simultaneously. Real loss or disruption AND real cause for joy, coexisting without canceling each other out.</p>
+<p>I've read enough spreads to know Misfortune + Cheerfulness together usually means something needed to break before the good thing could get in. The tower falls and the light gets in. Except the Misfortune is at full force, not softened. Something actually goes down. And the Cheerfulness is also full force — the joy after it is real, not a consolation prize.</p>
+<div class="callout"><p>The week lands like a building coming down and the neighborhood throwing a block party in the rubble. Both are real. The collapse makes room for something worth celebrating.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag kip">Layer Bridge</div>
+<h3>Where the Sibilla Meets the Animals</h3>
+<p>The Sibilla complicates Cheetah's runway: there are real delays (Waiting), a man in Scholar's clothing who's actually an adversary, and a Lord whose charm is covering something worse. The sprint isn't clean — it has friction that requires exactly the kind of instinct Cheetah provides, because you can't think your way past this particular obstacle course.</p>
+<p>Elephant's challenge — carry the weight honestly, in the body — echoes in the Old Woman reversed and the old Falseness that needs confronting. The weight isn't just emotional memory; there's something calcified into structure that needs to come down.</p>
+<p>And Dolphin's blessing finds its Sibilla version in the Gift that arrives even from the untrustworthy Lord, and in the Cheerfulness that follows the Misfortune. The blessing is real. It just has to come through wreckage first.</p>
+</div>
+
+</div>
+</div>
+
+<!-- ─── LAYER 03: SHADOW WORK ───────────────────────────────── -->
+<div class="reading-block reveal" id="week-shadow">
+<div class="layer-header">
+<div class="layer-number">03</div>
+<div class="layer-info"><h2>Shadow Work · Modern Witch Tarot</h2><p>the basement floor · what's running the show from underneath</p></div>
+<div class="layer-bar tar"></div>
+</div>
+<div class="reading-text">
+
+<div class="spread-photo-wrap" id="tarot-spread">
+  <img src="thread-reading-enhanced.jpg" alt="Modern Witch Tarot shadow work spread — Week of June 14">
+  <div class="spread-photo-caption">
+    <span class="caption-label">Modern Witch Tarot · shadow work spread</span>
+    <span class="caption-tap">tap to expand</span>
+  </div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag tar">WT1 · The Shadow to Name</div>
+<h3>King of Wands Reversed — The Throne I Built Before I Was Ready</h3>
+<p>Let me be honest with myself here, because this is the card I most want to analyze past.</p>
+<p><span class="ci tar">King of Wands (Reversed)</span> is the shadow of outward mastery. Upright, this King commands vision, creative authority, the ability to lead by sheer force of passionate will. Reversed, he's performing authority he hasn't fully earned yet, or wielding fire without the discipline to sustain it. But — and this is the version that actually landed — he could also just be someone who genuinely has the fire and the vision but hasn't finished building the structure to hold it. The power is real. The seat isn't stable yet.</p>
+<p>That's the honest read. Not that I'm faking it. Not that the fire isn't real. But I've been presenting as fully arrived somewhere I'm still building toward. The gap between the fire I carry and the structure I've built to hold it is exactly where this week's vulnerability lives.</p>
+<p>And yes — this connects directly to the Sibilla's Lord reversed. In a self-reading, the charming man of poor character isn't just an external figure. He's the version of me that performs the confidence, the authority, the vision, without doing the less glamorous foundational work.</p>
+<div class="callout"><p>The shadow to name: I've been leading from a throne that isn't finished being built. The fire is real. The structure under it isn't — yet. And I've been acting like it is.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag tar">WT2 · The Trigger</div>
+<h3>Wheel of Fortune Reversed — When Fate Reminds You Who's Actually Steering</h3>
+<p><span class="ci tar">Wheel of Fortune (Reversed)</span>. The card that normally brings expansion and the sense that things are moving in your favor — turning the other way. Something I expected to flow won't. Something I counted on spinning toward me will spin the other direction.</p>
+<p>This directly mirrors Fortune reversed in Sibilla Position 1. Both decks are saying the same thing from different angles: the lucky wind is not blowing this week. And when luck stops working, the gap between my actual foundation and my performed authority becomes visible. To me. To other people.</p>
+<p>The trigger isn't an enemy or a betrayal. It's just the wheel turning and the turn revealing what was always there — the unfinished parts I'd been hoping luck would cover.</p>
+<div class="callout"><p>When fortune reverses this week, my first instinct will be to compensate by performing more fire, more authority, more vision. That instinct is the shadow in action. Watch for it.</p></div>
+<div class="guidebook"><div class="guidebook-label">Mechanism</div><p>Wheel reversed (Jupiter blocked) + Fortune reversed in the Sibilla = double confirmation from separate decks. The lucky wind is off. This is the environment where the King of Wands shadow becomes visible. The trigger is environmental — the response is personal.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag tar">WT3 · The Integration</div>
+<h3>Two of Swords Reversed — Drop the Blindfold and Choose</h3>
+<p><span class="ci tar">Two of Swords (Reversed)</span>. Upright it's the figure at the crossroads with a blindfold on, holding both swords in perfect balance — the deliberate refusal to choose. Reversed, the blindfold comes off. The balance breaks. The stasis ends, one way or another.</p>
+<p>As integration — the path toward actually working with the shadow — this is precise. The King of Wands reversed is performing authority to avoid admitting he hasn't decided what his authority actually rests on. The Wheel reversed strips the luck away and forces the question. The Two of Swords reversed says: stop holding both swords. Drop one. Choose.</p>
+<p>Reversed, this probably won't feel like a graceful decision. It might feel like the decision was made for me rather than by me. Information I was blocking comes in. The stasis I was maintaining by not looking breaks apart. But that's the integration — not building a better performance, but making the real choice about what I'm actually building and letting the rest go.</p>
+<div class="callout"><p>The integration path: stop holding two positions to avoid committing to one. The blindfold is coming off whether I take it off or not. Better to do it myself.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag tar">Shadow ↔ Animal Spirit Bridge</div>
+<h3>What the Basement Says to the Rooftop</h3>
+<p>Elephant and King of Wands reversed are talking about the same wound from different elevations. Elephant says carry the full weight in your body, not in your concepts. The reversed King says you've been performing authority that hasn't been grounded in actual foundation. Both are saying the same thing: the fire is real but the earth under it isn't solid yet. Cheetah's sprint only works if the ground holds — you can't run full speed over a gap you've been pretending isn't there.</p>
+<p>And Dolphin — the blessing at the end — lines up with the Two of Swords reversed: the moment I drop the performance and make the real choice, the blessing can actually land. Sacred joy doesn't come to the performer. It comes to the person who finally stopped.</p>
+</div>
+
+</div>
+</div>
+
+<!-- ─── LAYER 04: SYNTHESIS ─────────────────────────────────── -->
+<div class="reading-block reveal" id="synthesis">
+<div class="layer-header">
+<div class="layer-number">04</div>
+<div class="layer-info"><h2>Synthesis</h2><p>the single truth told three ways</p></div>
+<div class="layer-bar syn"></div>
+</div>
+<div class="reading-text">
+<div class="reading-section">
+<div class="section-tag syn">✦ The Weave</div>
+<h3>What This Week Is Actually About</h3>
+<p>All three decks are saying the same thing: I have been operating ahead of my own foundation, and this week the gap becomes visible.</p>
+<p>Spirit gives me Cheetah — act decisively — tested by Elephant — carry your real weight — arriving at Dolphin — felt, embodied, genuine blessing. The human level shows luck reversing across both the Sibilla and the Tarot (which I cannot argue with, that's a double lock), a male figure whose intellectual authority is actually adversarial, a Lord whose charm covers bad character but who still has a real gift in the mix, and a week that ends in simultaneous collapse and celebration. The shadow layer names the pattern: unfinished throne, unstable seat, and when the Wheel reverses this week the instability shows. The integration is to drop the performance and actually choose.</p>
+<p>Here's the one truth that connects all of it: Cheetah's sprint only launches from solid ground. Elephant is asking me to make the ground solid by carrying my full weight honestly instead of conceptually. The Sibilla's Falseness + Old Woman reversed in the Active Move tells me exactly how — find the old lie I've been treating as permanent and say something about it. The Two of Swords reversed says the blindfold is coming off either way. And Dolphin and Cheerfulness say that when I actually do this — when I stop performing and build from the real foundation — there is genuine, felt, sacred joy waiting on the other side.</p>
+<p>Misfortune doesn't soften. Something goes down this week. But every deck agrees it's something that needed to go. The Cheerfulness after is not denial — it's what becomes possible when the false structure clears.</p>
+<p>On the Enemy and the Scholar reversed and the Lord reversed: there may be a real external figure carrying some of this. But in a self-reading I have to be honest — the adversary who weaponizes overthinking, the charming authority who hasn't earned the seat, the intellectual who can't apply his own knowledge — those are also portraits of me on a bad day. The enemy in Position 4 may be real. He may also be the version of me that uses analysis as avoidance and charm as scaffolding.</p>
+<div class="callout"><p>The single truth: Fortune is off. The throne is unfinished. Something is going to fall apart. And when it does, the real thing — the Dolphin, the Cheerfulness, the Gift — is on the other side. The week asks me to let something collapse that was never built right, and to stop performing authority long enough to actually earn it.</p></div>
+<p>I'm going to let this be good. Not comfortable, not easy — but good. Dolphin doesn't lie. Something genuinely sacred is arriving, and the price of admission is being honest about what I haven't finished building.</p>
+</div>
+</div>
+</div>
+
+<!-- ─── LAYER 05: AFTER THE FACT ────────────────────────────── -->
+<div class="reading-block reveal" id="after">
+<div class="layer-header">
+<div class="layer-number">05</div>
+<div class="layer-info"><h2>After the Fact</h2><p>reviewed june 20, 2026 · did fate deliver?</p></div>
+<div class="layer-bar ret"></div>
+</div>
+<div class="reading-text">
+
+<div class="reading-section">
+<div class="section-tag ret">The Reckoning</div>
+<h3>What the Week Actually Delivered</h3>
+<p>It's Saturday, June 20. I'm writing this from Reidsville — my hometown — where I spent yesterday with Markel and Natalie watching a movie at the backroom. It was exactly the kind of day Dolphin promised, which is a little obnoxious given how the rest of the week went. Heading back to Atlanta tomorrow for Father's Day. Let's go card by card.</p>
+</div>
+
+<div class="reading-section">
+<div class="section-tag ret">Animal Spirit · Arc Review</div>
+<h3>Cheetah → Elephant → Dolphin</h3>
+
+<div class="verdict-row">
+  <div>
+    <span class="verdict-chip yes">Hit</span>
+    <div class="verdict-card-name">Cheetah — The Sprint That Doesn't Hesitate</div>
+    <div class="verdict-text">Monday, June 15. I showed up to work not expecting to be there — I'd genuinely forgotten that my coworker Braylin had a FIFA World Cup shift our department was supporting for the state of Georgia. He'd told us the dates. I just hadn't gone back to check. So Monday was an unplanned call-in with no runway, no prep time, and I had to move immediately. That's Cheetah verbatim. See the gap, go, no second-guessing. And I showed up with something — boss energy that was consistent and visible all week, to the point where I was outpacing my director. That's not a performance. That's what the sprint looks like when it actually lands.</div>
+  </div>
+</div>
+
+<div class="verdict-row">
+  <div>
+    <span class="verdict-chip nuanced">Nuanced</span>
+    <div class="verdict-card-name">Elephant — The Weight of Everything You Come From</div>
+    <div class="verdict-text">The reading pointed toward ancestral and emotional weight — the kind of deep familial material I tend to intellectualize. What actually showed up was professional and operational weight. The week just never let up. I was on my feet constantly, schedule rearranged, couldn't be lazy — something always needed more. My usual split (remote Monday and Thursday, in-person otherwise) got completely flipped: I worked in-person Monday through Wednesday because a dentist appointment I'd forgotten about pushed my Reidsville trip from Wednesday to Friday. Three unexpected in-person days. The Elephant was right, the framing was just interior when the actual weight looked like work clothes and a commute. Carrying the herd by being present when you're supposed to be — that tracks. The reading just expected more feelings and got more logistics.</div>
+  </div>
+</div>
+
+<div class="verdict-row">
+  <div>
+    <span class="verdict-chip yes">Hit</span>
+    <div class="verdict-card-name">Dolphin — The Blessing That Arrives When You're Ready</div>
+    <div class="verdict-text">Friday into Saturday. Reidsville. Seeing my mom. The movie at the backroom with Markel and Natalie. This was a genuinely, felt-in-the-body amazing day — sacred play, communication as pure joy, exactly what Dolphin describes. The reading said sprint, carry the weight, then receive something that touches the heart. That is the exact shape the week had. I earned it. Dolphin didn't lie.</div>
+  </div>
+</div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag ret">Sibilla · Position Review</div>
+<h3>Seven Positions, One Week Later</h3>
+
+<div class="verdict-row">
+  <div>
+    <span class="verdict-chip yes">Hit</span>
+    <div class="verdict-card-name">Position 1 — Fortune Reversed + Reunion</div>
+    <div class="verdict-text">The week was consistently hard — nothing came easy or lucky. Plans shifted, unexpected call-in, more expenses than I budgeted for. Fortune reversed, no question. And Reunion: I made it home to Reidsville. I saw my mom, my friends. Literal reunion with the people and the place I come from. I had to work for it — the trip kept getting pushed — but the return was real.</div>
+  </div>
+</div>
+
+<div class="verdict-row">
+  <div>
+    <span class="verdict-chip nuanced">Nuanced</span>
+    <div class="verdict-card-name">Position 2 — Despair + Service Reversed</div>
+    <div class="verdict-text">The reading framed this as jealousy-driven ego wound plus support failing behind the scenes. What I can say: there are workplace dynamics with complicated edges — consistently outperforming people above me has its own specific sting, even when it's mostly pride. Service reversed I'm reading now as my own tracking system failing me. I didn't go back and check Braylin's schedule. A system that was supposed to keep me organized quietly fell down, and I didn't catch it until it mattered. That's Service reversed in its most personal form.</div>
+  </div>
+</div>
+
+<div class="verdict-row">
+  <div>
+    <span class="verdict-chip yes">Hit</span>
+    <div class="verdict-card-name">Position 3 — Waiting + Surprise</div>
+    <div class="verdict-text">Two things. One: I was planning to leave for Reidsville Wednesday. Dentist appointment I'd forgotten pushed it to Friday. Waiting — the trip took longer to arrive than I wanted. Two: I found a nail in my tire this week. It did not puncture. By the grace of something, no damage. That is a textbook Surprise card — something that could have been a disaster reveals itself as a lucky break. I also budgeted $70–100 for car maintenance and paid $378, but the nail was free. The delay was real. The surprise was real. Both upright, both delivered.</div>
+  </div>
+</div>
+
+<div class="verdict-row">
+  <div>
+    <span class="verdict-chip partial">Partial</span>
+    <div class="verdict-card-name">Position 4 — Scholar Reversed + Enemy</div>
+    <div class="verdict-text">This is the one I can't cleanly confirm. A male adversary wearing intellectual authority as a mask didn't show up as a dramatic confrontation. My relationship with Braylin actually moved the opposite direction this week — he's becoming more open and honest with me, less guarded, which is the opposite of enemy behavior. If there was an Enemy energy present, it was more diffuse — the systems and expectations piling friction from every direction, rather than one specific person. Or the reading was right that this would be a surprise, meaning whatever this figure represents hasn't fully surfaced yet. I'm leaving it open.</div>
+  </div>
+</div>
+
+<div class="verdict-row">
+  <div>
+    <span class="verdict-chip yes">Hit</span>
+    <div class="verdict-card-name">Position 5 — Lord Reversed + Gift</div>
+    <div class="verdict-text">The car. I went in expecting $70–100. I paid $378. That is the Lord reversed in financial form — a charming situation (routine maintenance) that costs dramatically more than it presented. The Gift: the nail that didn't puncture. I got a real gift in the same moment the Lord was taking from me. Receive what's actually being offered — the repair that genuinely needed to happen — while keeping your eyes open about the source. Take the gift. Don't trust the Lord. The lesson landed.</div>
+  </div>
+</div>
+
+<div class="verdict-row">
+  <div>
+    <span class="verdict-chip yes">Hit</span>
+    <div class="verdict-card-name">Position 6 — Falseness + Old Woman Reversed</div>
+    <div class="verdict-text">The active move was: find the old lie and name it. The old lie this week was a pattern of not going back to check — Braylin's schedule, the dentist appointment, the car. Things I assume are handled because I once handled them. The Old Woman reversed is exactly that pattern: calcified, resistant to change, pretending to be stability when it's actually just rigidity. I didn't get to do the heroic version of this card. The week did it for me by making the consequences visible. Monday morning was the old lie showing up without its mask.</div>
+  </div>
+</div>
+
+<div class="verdict-row">
+  <div>
+    <span class="verdict-chip yes">Hit</span>
+    <div class="verdict-card-name">Position 7 — Misfortune + Cheerfulness</div>
+    <div class="verdict-text">Both happened. That's the only way to say it. The week was genuinely hard — draining, unrelenting, nothing going smoothly, expenses blowing the budget, plans shifting, three in-person days when I expected one. Sustained pressure where things keep not going your way. That's Misfortune. Then Saturday: Reidsville, the movie, Markel and Natalie, my mom. That's Cheerfulness at full force. The block party in the rubble. Both real, neither canceling the other out.</div>
+  </div>
+</div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag ret">Shadow Work · What Actually Happened Underneath</div>
+<h3>The King, the Wheel, the Swords</h3>
+<p>The shadow arc deserves its own accounting. The King of Wands reversed named a gap between performed authority and built foundation. What I can say is: the week consistently required me to actually show up at the authority level the King was questioning. Three unexpected in-person days. Handling Braylin's absence when I was part of why the gap existed. Boss energy that was real and effective, not performed. It's possible I'm building the throne in real time. Maybe it's not unfinished so much as mid-construction. The fire was real this week. The structure held.</p>
+<p>The Wheel reversed was the week's entire environment — luck off, every variable adding friction instead of flow. That part was precise.</p>
+<p>The Two of Swords reversed: the blindfold that came off was the comfortable assumption that my organizational systems were actually functioning. They weren't. I had to see that clearly and move anyway. Showing up Monday, rerouting Thursday, getting the car fixed at $378 whether I wanted to or not — that was the integration. Not elegant. But real.</p>
+<div class="callout moon"><p>The cards were right that this week would be hard and then beautiful. What they couldn't know — what I'm sitting with now — is that the hard part made the beautiful part possible. Reidsville hit different after a week like that. Dolphin lands harder when Elephant was real.</p></div>
+</div>
+
+<div class="reading-section">
+<div class="section-tag ret">Final Verdict</div>
+<h3>Did Fate Deliver?</h3>
+<p>Yes. The arc — sprint, carry weight, receive blessing — mapped almost exactly onto the shape of the week. Sibilla Position 7 (Misfortune + Cheerfulness) was the most precise card in the entire spread. Fortune reversed locking across both decks was undeniable. Waiting and Surprise in Position 3 both came through on separate counts.</p>
+<p>Where the reading missed slightly: Elephant's framing was too interior. It found the right weight but pointed toward emotional and ancestral processing, when the actual Elephant this week was professional and operational — carrying the department because that's what the moment needed. That's a definition issue in how I read the card, not a wrong card. I've updated the Elephant entry in my reference deck to include communal duty and literal showing up for the herd. Future reads will be sharper on this.</p>
+<p>Position 4 (Scholar Reversed + Enemy) stays open. Either it was diffuse and I didn't see it clearly, it hasn't fully resolved, or it was more systemic than personal this week. I'm leaving it in the file rather than forcing a verdict onto it.</p>
+<div class="callout"><p>If you're going to read cards for yourself, this is what accountability looks like. You keep the record. You go back. You find out whether the instruments were in tune. Mine were — mostly. And mostly, when we're talking about this many variables across an entire week, is worth something.</p></div>
+</div>
+
+</div>
+</div>
+
+</main>
+
+<section style="max-width:900px;margin:0 auto;padding:3rem 2rem;border-top:1px solid rgba(201,148,58,.12);text-align:center">
+  <div style="font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,148,58,.35);margin-bottom:.8rem">◆ Fate &amp; Commentary · Jaylon · June 2026</div>
+  <p style="font-family:'Cormorant Garamond',serif;font-size:.88rem;color:rgba(245,240,232,.4);line-height:1.7">Read Sunday, June 14. Reviewed Saturday, June 20. The cards were pulled blind — the commentary was added after the week closed.</p>
+</section>
+
+<script>
+(function(){
+  const sf=document.getElementById('starfield');
+  for(let i=0;i<60;i++){
+    const s=document.createElement('div');s.className='star';
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${3+Math.random()*5}s;--delay:${Math.random()*6}s;--bright:${.3+Math.random()*.5}`;
+    sf.appendChild(s);
+  }
+})();
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.spread-photo-wrap').forEach(w=>{
+  w.addEventListener('click',()=>w.classList.toggle('zoomed'));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')w.classList.remove('zoomed')});
+});
+</script>
+</body>
+</html>
